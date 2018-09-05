@@ -1,5 +1,5 @@
 class BuildingsController < ApplicationController
-    
-    def show
-    end    
+    def index
+    render :layout => "new_layout"
+    end
 end
