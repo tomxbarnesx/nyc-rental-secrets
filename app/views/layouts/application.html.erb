@@ -4,14 +4,44 @@
     <title>Rentalsecrets</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <%= stylesheet_link_tag   "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css" %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+  <% if notice %>
+  <p class="notice"><%= notice %></p>
+  <%end%>
+  <% if alert %>
+  <p class="alert"><%= alert %></p>
+  <% end%>
+    
+  <div class="ui top fixed menu">
+    <div class="item">
+      SQUAWKR
+    </div>
+
+   
+    <div class="ui category search item">
+    <div class="ui transparent icon input">
+      <input class="prompt" type="text" placeholder="Search animals...">
+      <i class="search link icon"></i>
+    </div>
+    <div class="results"></div>
+  </div>
+
+  <div class="right menu">
+    <a class="item">Sign-in</a>
+    <a class="item">Sign-up</a>
+    <a class="item">Help</a>
+  </div>
+  
+</div>
+
+
+
+
     <%= yield %>
   </body>
 </html>
