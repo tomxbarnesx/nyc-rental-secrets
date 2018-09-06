@@ -1,0 +1,15 @@
+<script>
+
+$.ajax({
+    url: "https://data.cityofnewyork.us/resource/muk7-ct23.json?bin=1000040",
+    type: "GET",
+    data: {
+      "$limit" : 10000000,
+      "$$app_token" : "euroQs7GENEsqbV3te6FVNUGf"
+    }
+}).done(function(data) {
+  alert("Retrieved " + data.length + " records from the dataset!");
+  console.log(data);
+});
+
+</script>
