@@ -6,7 +6,6 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find(params[:id])
-        redirect_to '/'
 
     end
 
@@ -25,7 +24,6 @@ class UsersController < ApplicationController
     def create
         @user = User.find(params[:id])
     end
-
 
    
 end
