@@ -94,7 +94,7 @@ function initMap() {
         type: "GET",
         data: {
           $limit: 10000000,
-          $$app_token: "euroQs7GENEsqbV3te6FVNUGf"
+          $$app_token: "XXXXXXXXXXXXXX"
         }
       }).done(function(data) {
         console.log(data);
