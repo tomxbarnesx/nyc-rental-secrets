@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   root to: "buildings#index"
 
   resources :users
-    resources :buildings do
-      resources :comments
-  end
+  resources :buildings
+  resources :comments
 end
