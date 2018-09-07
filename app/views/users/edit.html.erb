@@ -1,10 +1,14 @@
- <div class="ui container segment">
-    <%= form_with model: @user do |form| %>
-        <ul>
-            <td> First Name: <%= form.text_field :first_name %> </td>
-            <td> Last Name: <%= form.text_field :last_name %> </td>
-            <td> Age: <%= form.number_field :age %> </td>
-            <td> <%= form.submit %> </td>
-        </ul>
-    <% end %>
-</div>
+
+    <div class="user_table">
+        <div class="ui single line table">
+            <%= form_for @user do |form| %>
+                <ul>
+                    <td> Username: <%= form.text_field :username %> </td>
+                    <td> First Name: <%= form.text_field :first_name %> </td>
+                    <td> Last Name: <%= form.text_field :last_name %> </td>
+                    <td> Birthday: <%= form.date_field :birthdate %> </td>
+                    <td> <%= form.submit %> </td>
+                </ul>
+            <% end %>
+        </div>
+    </div>
