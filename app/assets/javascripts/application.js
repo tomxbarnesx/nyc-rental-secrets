@@ -14,6 +14,7 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require jquery
 
 $(document).ready(function() {
   $(".menu .item").tab({ history: false });
