@@ -16,10 +16,6 @@
 //= require_tree .
 //= require jquery
 
-$(document).ready(function() {
-  $(".menu .item").tab({ history: false });
-});
-
 function initMap() {
   let main = {
     zoom: 8,
@@ -82,6 +78,27 @@ function initMap() {
 
       let title = document.getElementById("title");
       title.innerText = markers[0].title;
+      let splitted = markers[0].title.toUpperCase().split(" ");
+
+      $.ajax({
+        url:
+          "https://data.cityofnewyork.us/resource/muk7-ct23.json?$where=(starts_with(house_number, '" +
+          splitted[0] +
+          "') AND starts_with(house_street, '" +
+          splitted[1] +
+          "'))",
+        type: "GET",
+        data: {
+          $limit: 10000000,
+          $$app_token: "euroQs7GENEsqbV3te6FVNUGf"
+        }
+      }).done(function(data) {
+        alert("Retrieved " + data.length + " records from the dataset!");
+        console.log(data);
+      });
+
+      console.log(splitted[0]);
+      console.log(splitted[1]);
 
       if (place.geometry.viewport) {
         bounds.union(place.geometry.viewport);
