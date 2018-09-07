@@ -1,7 +1,7 @@
 <script>
 
 $.ajax({
-    url: "https://data.cityofnewyork.us/resource/muk7-ct23.json?bin=1000040",
+    url: "https://data.cityofnewyork.us/resource/muk7-ct23.json?$where=(starts_with(house_number, '2836') AND starts_with(house_street, 'ZULETTE AVENUE'))",
     type: "GET",
     data: {
       "$limit" : 10000000,
