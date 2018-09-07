@@ -83,6 +83,9 @@ function initMap() {
       let title = document.getElementById("title");
       title.innerText = markers[0].title;
 
+
+      
+
       if (place.geometry.viewport) {
         bounds.union(place.geometry.viewport);
       } else {
