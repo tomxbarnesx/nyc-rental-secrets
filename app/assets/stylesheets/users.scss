@@ -3,13 +3,24 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #profile_content {
-    width: 350px;
-    margin-top: 100px;
-    margin-left:100px;
+    width: 600px;
+    margin-top: 10px;
+    margin-left: 50px;
 
 }
 #card_profile{
     width: 350px;
+    margin-left: 100px;
+}
+
+#crud{
+    width: 600px;
     margin-top: 100px;
-    margin-left:100px;
+    margin-left: 400px;
+}
+
+.info{
+    width: 600px;
+    margin-left: 450px;
+    margin-top: -400px;
 }
