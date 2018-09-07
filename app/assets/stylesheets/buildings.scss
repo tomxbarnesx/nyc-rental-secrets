@@ -1,3 +1,49 @@
 // Place all the styles related to the buildings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#wrap {
+  display: flex;
+  margin-top: 7%;
+  margin-left: 5%;
+  margin-right: 5%;
+  justify-content: center;
+  margin-bottom: 5%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.columns {
+  width: 50%;
+  margin: 1%;
+  padding-top: 80px;
+  padding-bottom: 10px;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3%;
+  background-color: #564f8a;
+  color: white;
+  text-align: center;
+  padding: 0.2%;
+}
+.ui.bottom.attached.tab.active.segment {
+  overflow: scroll;
+  height: 400px;
+}
+.ui.card {
+  width: 90%;
+  margin-left: 5%;
+}
+
+.ui.form {
+  width: 90%;
+  height: 320px;
+}
