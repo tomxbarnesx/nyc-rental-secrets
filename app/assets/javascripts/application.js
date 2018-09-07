@@ -16,6 +16,10 @@
 //= require_tree .
 //= require jquery
 
+$(document).ready(function() {
+  $(".menu .item").tab({ history: false });
+});
+
 function initMap() {
   let main = {
     zoom: 8,
@@ -95,10 +99,9 @@ function initMap() {
       }).done(function(data) {
         alert("Retrieved " + data.length + " records from the dataset!");
         console.log(data);
-      });
 
-      console.log(splitted[0]);
-      console.log(splitted[1]);
+        document.getElementById("bin").placeholder = data[0].bin;
+      });
 
       if (place.geometry.viewport) {
         bounds.union(place.geometry.viewport);
