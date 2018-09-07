@@ -13,22 +13,61 @@
   </head>
 
 <body class="newlayout-body" id="blur">
-<div class="login-content">
-<%=yield%>
-</div>
 
-<div class="ui right action left icon input">
-  <i class="search icon"></i>
-  <input type="text" placeholder="Search">
-  <div class="ui basic floating dropdown button">
-    <div class="text">This Page</div>
-    <i class="dropdown icon"></i>
-    <div class="menu">
-      <div class="item">This Organization</div>
-      <div class="item">Entire Site</div>
+
+
+<div class="ui people shape">
+  <div class="sides">
+    <div class="side">
+      <div class="ui card">
+        <div class="image">
+          <img src="/images/avatar/large/steve.jpg">
+        </div>
+        <div class="content">
+          <div class="header">Steve Jobes</div>
+          <div class="meta">
+            <a>Acquaintances</a>
+          </div>
+          <div class="description">
+          <%=yield%>
+          </div>
+        </div>
+        <div class="extra content">
+          <span class="right floated">
+            Joined in 2014
+          </span>
+          <span>
+            <i class="user icon"></i>
+            151 Friends
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="side active">
+      <div class="ui card">
+        <div class="image">
+          <img src="/images/avatar/large/stevie.jpg">
+        </div>
+        <div class="content">
+          <a class="header">Stevie Feliciano</a>
+          <div class="meta">
+            <span class="date">Joined in 2014</span>
+          </div>
+          <div class="description">
+            Stevie Feliciano is a library scientist living in New York City. She likes to spend her time reading, running, and writing.
+          </div>
+        </div>
+        <div class="extra content">
+          <a>
+            <i class="user icon"></i>
+            22 Friends
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
 
 </body>
 </html>
