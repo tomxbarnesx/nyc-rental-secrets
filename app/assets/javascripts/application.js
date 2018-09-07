@@ -14,6 +14,7 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require jquery
 
 $(document).ready(function() {
   $(".menu .item").tab({ history: false });
@@ -81,6 +82,9 @@ function initMap() {
 
       let title = document.getElementById("title");
       title.innerText = markers[0].title;
+
+
+      
 
       if (place.geometry.viewport) {
         bounds.union(place.geometry.viewport);
