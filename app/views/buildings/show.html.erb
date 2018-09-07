@@ -1,3 +1,6 @@
+
+
+
 <div id="wrap">
     <div class="ui raised segment row" style="width:90%">
     <div class="ui top attached purple label">
@@ -20,22 +23,15 @@
         </div>
 
         <div class="ui bottom attached tab active segment" data-tab="first">
+
+
+        <% @comments.each do |comment| %>
         <div class="ui card">
       <div class="content">
           <label><a class="ui teal right ribbon label">Squawk</a></label>
-      <div class="header">This is a title</div>
+      <div class="header"><%=comment.comment_type%></div>
           <div class="description">
-              <p>  2L, Apartment, Entire apartment
-                          Status:
-                          Closed
-                          Code:
-                          No heat, Entire building, Heat/hot water
-                          Description:
-                          The department of housing preservation and development responded to a complaint of no heat or hot water and was advised by a tenant in the building that heat and hot water had been restored. If the condition still exists, please file a new complaint.
-                          2L, Apartment, Entire apartment
-                          Status:
-                          Closed
-                          Code: file a new complaint   
+              <p>  <%=comment.body%> 
               </p>
           </div>
       </div>
@@ -46,66 +42,71 @@
           </span>
       </div>
   </div>
-           
+           <%end%>
        
 
 
 
-  <div class="ui card">
-      <div class="content">
-          <label><a class="ui teal right ribbon label">Squawk</a></label>
-      <div class="header">This is a title</div>
-          <div class="description">
-              <p>  2L, Apartment, Entire apartment
-                          Status:
-                          Closed
-                          Code:
-                          No heat, Entire building, Heat/hot water
-                          Description:
-                          The department of housing preservation and development responded to a complaint of no heat or hot water and was advised by a tenant in the building that heat and hot water had been restored. If the condition still exists, please file a new complaint.
-                          2L, Apartment, Entire apartment
-                          Status:
-                          Closed
-                          Code: file a new complaint   
-              </p>
-          </div>
-      </div>
-      <div class="extra content">
-          <span class="left floated like">
-              <i class="like icon"></i>
-              Like
-          </span>
-      </div>
-  </div>
+</div>
 
-      </div>
-      <div class="ui bottom attached tab segment" data-tab="second">
-        
-      
+
+
+      <div class="ui bottom attached tab segment" data-tab="second">  
       <div class="ui card">
       <div class="content">
           <label><a class="ui tag label">New Squawk</a></label>
-          <form class="ui form">
-              <div><h1>Add a Squawk</h1></div><br>
+
+
+
+          <%
+
+          <%= form_with model: Comment.new do |form| %>
+          <div class="ui form">
               <div class="field">
-                  <label>Title</label>
-                  <input type="text" name="title" placeholder="Title">
+                  <label>User ID</label>
+                  <%= form.number_field :user_id, placeholder: "User ID"%>
               </div>
+
               <div class="field">
-                  <label>Text</label>
-                  <input type="text" name="text" placeholder="Content...">
-              </div>
+                  <label>Building ID</label>
+                  <%= form.number_field :building_id, placeholder: "Building ID", :id => 'bin'%>
+                </div>
+
+
+                <div class="field">
+                <label>Type</label>
+                <%= form.text_field :comment_type, placeholder: "Comment type"%>
+                </div>
+
+                <div class="field">
+                <label>Rating</label>
+                <%= form.number_field :rating, placeholder: "Rating"%>
+                </div>
+
+                <div class="field">
+                <label>Body</label>
+                <%= form.text_field :body, placeholder: "Content..."%>
+                </div>
+
               <div class="field">
                   <div class="ui checkbox">
                       <input type="checkbox" tabindex="0" class="hidden">
                       <label>I agree I am responsible for my squawks</label>
                   </div>
               </div>    
-              <button class="ui button" type="submit">Submit</button>
-          </form>  
+              <%= form.submit  "Submit" %>
+              <% end %>
+
+
+          </div>  
       </div>  
     </div>
     </div>
+
+
+   
+
+
 
       <div class="ui bottom attached tab segment" data-tab="third">
         Violations
@@ -114,3 +115,7 @@
         </div> 
     </div>
 </div>
+
+
+
+

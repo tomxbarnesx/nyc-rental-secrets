@@ -1,0 +1,10 @@
+
+    <%= form_for @user do |form| %>
+        <ul>
+            <td> Username: <%= form.text_field :username %> </td>
+            <td> First Name: <%= form.text_field :first_name %> </td>
+            <td> Last Name: <%= form.text_field :last_name %> </td>
+            <td> Birthday: <%= form.number_field :Bithdate %> </td>
+            <td> <%= form.submit %> </td>
+        </ul>
+    <% end %>

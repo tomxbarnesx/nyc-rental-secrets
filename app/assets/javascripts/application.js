@@ -82,6 +82,25 @@ function initMap() {
 
       let title = document.getElementById("title");
       title.innerText = markers[0].title;
+      let splitted = markers[0].title.toUpperCase().split(" ");
+
+      $.ajax({
+        url:
+          "https://data.cityofnewyork.us/resource/muk7-ct23.json?$where=(starts_with(house_number, '" +
+          splitted[0] +
+          "') AND starts_with(house_street, '" +
+          splitted[1] +
+          "'))",
+        type: "GET",
+        data: {
+          $limit: 10000000,
+          $$app_token: "XXXXXXXXXXXXXX"
+        }
+      }).done(function(data) {
+        console.log(data);
+
+        document.getElementById("bin").value = data[0].bin;
+      });
 
 
       
