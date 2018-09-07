@@ -14,9 +14,7 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
-<<<<<<< HEAD
 //= require jquery
-=======
 
 $(document).ready(function() {
   $(".menu .item").tab({ history: false });
@@ -94,4 +92,3 @@ function initMap() {
     map.fitBounds(bounds);
   });
 }
->>>>>>> 52451aa95d401e92617e43c81ae003bba89502ec
