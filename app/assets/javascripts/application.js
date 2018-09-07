@@ -15,10 +15,6 @@
 //= require turbolinks
 //= require_tree .
 //= require jquery
-<<<<<<< HEAD
-
-=======
->>>>>>> 5c42ce1... added jquery back
 
 $(document).ready(function() {
   $(".menu .item").tab({ history: false });
@@ -87,9 +83,6 @@ function initMap() {
       let title = document.getElementById("title");
       title.innerText = markers[0].title;
 
-
-      
-
       if (place.geometry.viewport) {
         bounds.union(place.geometry.viewport);
       } else {
@@ -98,8 +91,4 @@ function initMap() {
     });
     map.fitBounds(bounds);
   });
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 5c42ce1... added jquery back
