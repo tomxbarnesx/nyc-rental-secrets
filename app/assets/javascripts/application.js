@@ -97,10 +97,9 @@ function initMap() {
           $$app_token: "euroQs7GENEsqbV3te6FVNUGf"
         }
       }).done(function(data) {
-        alert("Retrieved " + data.length + " records from the dataset!");
         console.log(data);
 
-        document.getElementById("bin").placeholder = data[0].bin;
+        document.getElementById("bin").value = data[0].bin;
       });
 
       if (place.geometry.viewport) {

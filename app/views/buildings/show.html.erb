@@ -82,29 +82,40 @@
   </div>
 
       </div>
-      <div class="ui bottom attached tab segment" data-tab="second">
-        
-      
+
+
+
+      <div class="ui bottom attached tab segment" data-tab="second">  
       <div class="ui card">
       <div class="content">
           <label><a class="ui tag label">New Squawk</a></label>
-          <form class="ui form">
-              <div><h1>Add a Squawk</h1></div><br>
+          <%= form_with model: Comment.new do |form| %>
+          <div class="ui form">
               <div class="field">
-                  <label>Title</label>
-                  <input type="text" name="title" placeholder="Title">
-              </div>
-              <div class="field">
-                  <label>Text</label>
-                  <input type="text" name="text" placeholder="Content...">
+                  <label>User ID</label>
+                  <%= form.number_field :user_id, placeholder: "User ID"%>
               </div>
 
               <div class="field">
-                 <label>Building number</label>
-                 <input id="bin" type="text" name="text" placeholder="" readonly>
-              </div>
+                  <label>Building ID</label>
+                  <%= form.number_field :building_id, placeholder: "Building ID", :id => 'bin'%>
+                </div>
 
 
+                <div class="field">
+                <label>Type</label>
+                <%= form.text_field :type, placeholder: "Type"%>
+                </div>
+
+                <div class="field">
+                <label>Rating</label>
+                <%= form.number_field :rating, placeholder: "Rating"%>
+                </div>
+
+                <div class="field">
+                <label>Body</label>
+                <%= form.text_field :body, placeholder: "Content..."%>
+                </div>
 
               <div class="field">
                   <div class="ui checkbox">
@@ -112,11 +123,19 @@
                       <label>I agree I am responsible for my squawks</label>
                   </div>
               </div>    
-              <button class="ui button" type="submit">Submit</button>
-          </form>  
+              <%= form.submit  "Submit" %>
+              <% end %>
+
+
+          </div>  
       </div>  
     </div>
     </div>
+
+
+   
+
+
 
       <div class="ui bottom attached tab segment" data-tab="third">
         Violations

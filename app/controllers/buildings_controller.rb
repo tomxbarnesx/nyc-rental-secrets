@@ -7,4 +7,6 @@ class BuildingsController < ApplicationController
         render :layout=> "application"
     end
 
+    
+
 end
