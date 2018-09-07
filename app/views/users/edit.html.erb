@@ -1,20 +1,20 @@
 <div id="profile_content">
-<div class="ui card">
-  <div class="content">
-    <div class="header">Profile Edit</div>
-    <div class="description">
-     <%= form_for @user do |form| %>
-            <ul>
-                <td> Username: <%= form.text_field :username %> </td>
-                <td> First Name: <%= form.text_field :first_name %> </td>
-                <td> Last Name: <%= form.text_field :last_name %> </td>
-                <td> Birthday: <%= form.date_field :birthdate %> </td>
-                <td> <%= form.submit %> </td>
-            </ul>
-        <% end %>
-        <%= link_to "Edit", edit_user_path(user) %>
+    <div class="ui card">
+        <div class="content">
+            <div class="header">Profile Edit</div>
+                <div class="description">
+                    <%= form_for @user do |form| %>
+                        <ul>
+                            <td> Username: <%= form.text_field :username %> </td>
+                            <td> First Name: <%= form.text_field :first_name %> </td>
+                            <td> Last Name: <%= form.text_field :last_name %> </td>
+                            <td> Birthday: <%= form.date_field :birthdate %> </td>
+                            <td> <%= form.submit %> </td>
+                        </ul>
+                    <% end %>
+                    
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-  </div>
-</div>
 </div>
