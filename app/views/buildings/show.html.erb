@@ -22,6 +22,11 @@
             <a class="item" data-tab="third">Violations</a>
         </div>
 
+
+        <%= form_tag("/buildings/show", method:"get")  do %>
+        <%= text_field_tag :bin1, ""%>
+        <%= submit_tag 'Search'%>
+          <%end%>  
         <div class="ui bottom attached tab active segment" data-tab="first">
 
 
@@ -58,7 +63,7 @@
 
 
 
-          <%
+        
 
           <%= form_with model: Comment.new do |form| %>
           <div class="ui form">

@@ -100,6 +100,7 @@ function initMap() {
         console.log(data);
 
         document.getElementById("bin").value = data[0].bin;
+        document.getElementById("bin1").value = data[0].bin;
       });
 
       if (place.geometry.viewport) {
