@@ -23,7 +23,17 @@
         </div>
 
 
-        <%= form_tag("/buildings/show", method:"get")  do %>
+
+        <script>
+        
+        $(document).ready(function(){
+            $("formname").submit();
+        });
+        </script>
+
+
+
+        <%= form_tag("/buildings/show",  :id => 'formname', method:"get")  do %>
         <%= text_field_tag :bin1, ""%>
         <%= submit_tag 'Search'%>
           <%end%>  
