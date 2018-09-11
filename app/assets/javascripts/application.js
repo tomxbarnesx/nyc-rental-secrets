@@ -21,8 +21,14 @@ $(document).ready(function() {
 });
 
 var placeSearch, autocomplete, geocoder;
-let search;
-console.log(search);
+
+$(document).ready(function() {
+  if (window.name !== null) {
+    document.getElementById("mapSearch").value = window.name;
+    document.getElementById("title").innerText = window.name;
+    window.name = "";
+  }
+});
 
 function initAutocomplete() {
   geocoder = new google.maps.Geocoder();
