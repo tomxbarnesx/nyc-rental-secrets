@@ -16,6 +16,18 @@ class CommentsController < ApplicationController
 
     end
 
+    def show 
+        p params[:bin1]
+        if Comment.where(:building_id => params[:bin1])
+            @comments = Comment.where(:building_id => params[:bin1])
+        else
+        @comments = Comment.all
+        end
+
+        redirect_to "buildings/show"
+
+    end
+
 
 
     def comment_params

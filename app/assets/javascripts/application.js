@@ -13,8 +13,8 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require_tree .
 //= require jquery
+//= require_tree .
 
 $(document).ready(function() {
   $(".menu .item").tab({ history: false });
@@ -25,13 +25,14 @@ var placeSearch, autocomplete, geocoder;
 $(document).ready(function() {
   if (window.name !== null) {
     document.getElementById("mapSearch").value = window.name;
-    document.getElementById("title").innerText = window.name;
+
     window.name = "";
   }
 });
 
 function initAutocomplete() {
   geocoder = new google.maps.Geocoder();
+
   autocomplete = new google.maps.places.Autocomplete(
     document.getElementById("autocomplete") /*,
       {types: ['(cities)']}*/
@@ -43,7 +44,16 @@ function initAutocomplete() {
 function codeAddress(address) {
   geocoder.geocode({ address: address }, function(results, status) {
     if (status == "OK") {
-      console.log(search);
+      geoLocation = results[0].geometry.location;
+
+      console.log(results[0].geometry.bounds.f["f"]);
+      console.log(results[0].geometry.bounds.b["f"]);
+
+      let geoLocation1 = results[0].geometry.bounds.b["f"];
+      let geoLocation2 = results[0].geometry.bounds.f["f"];
+      localStorage.setItem("geoLocation1", geoLocation1);
+      localStorage.setItem("geoLocation2", geoLocation2);
+
       alert(results[0].geometry.location);
     } else {
       alert("Geocode was not successful for the following reason: " + status);
@@ -55,19 +65,19 @@ function fillInAddress() {
   var place = autocomplete.getPlace();
   search = document.getElementById("autocomplete").value;
 
-  //   codeAddress(document.getElementById('autocomplete').value);
+  codeAddress(document.getElementById("autocomplete").value);
 }
 
 function initMap() {
   let main = {
     zoom: 8,
-    center: { lat: 40.7128, lng: -74.006 }
+    center: { lat: 40.7079836, lng: -74.00648610000002 }
   };
 
   let map = new google.maps.Map(document.getElementById("map"), main);
 
   let marker = new google.maps.Marker({
-    position: { lat: 40.7128, lng: -74.006 },
+    position: { lat: 40.7079836, lng: -74.00648610000002 },
     map: map,
     draggable: true
   });
@@ -75,6 +85,34 @@ function initMap() {
   var searchBox = new google.maps.places.SearchBox(
     document.getElementById("mapSearch")
   );
+
+  if (document.getElementById("mapSearch").value != null) {
+    let splitted = document
+      .getElementById("mapSearch")
+      .value.toUpperCase()
+      .split(" ");
+
+    $.ajax({
+      url:
+        "https://data.cityofnewyork.us/resource/muk7-ct23.json?$where=(starts_with(house_number, '" +
+        splitted[0] +
+        "') AND starts_with(house_street, '" +
+        splitted[1] +
+        "'))",
+      type: "GET",
+      data: {
+        $limit: 10000000,
+        $$app_token: "euroQs7GENEsqbV3te6FVNUGf"
+      }
+    }).done(function(data) {
+      console.log(data);
+      document.getElementById("title").innerText = document.getElementById(
+        "mapSearch"
+      ).value;
+      document.getElementById("bin").value = data[0].bin;
+      document.getElementById("bin1").value = data[0].bin;
+    });
+  }
 
   map.addListener("bounds_changed", function() {
     searchBox.setBounds(map.getBounds());
@@ -120,6 +158,7 @@ function initMap() {
 
       let title = document.getElementById("title");
       title.innerText = markers[0].title;
+
       let splitted = markers[0].title.toUpperCase().split(" ");
 
       $.ajax({
