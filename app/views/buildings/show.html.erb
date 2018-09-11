@@ -33,10 +33,10 @@
 
 
 
-        <%= form_tag("/buildings/show",  :id => 'formname', method:"get")  do %>
-        <%= text_field_tag :bin1, ""%>
-        <%= submit_tag 'Search'%>
-          <%end%>  
+        <%= form_tag("/buildings/show", method:"get")  do %>
+            <%= text_field_tag :bin1, ""%>
+            <%= submit_tag 'Search'%>
+              <%end%>
         <div class="ui bottom attached tab active segment" data-tab="first">
 
 
