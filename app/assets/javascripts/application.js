@@ -70,14 +70,14 @@ function fillInAddress() {
 
 function initMap() {
   let main = {
-    zoom: 8,
-    center: { lat: 40.7079836, lng: -74.00648610000002 }
+    zoom: 16,
+    center: { lat: Number(geoLocation1), lng: Number(geoLocation2) }
   };
 
   let map = new google.maps.Map(document.getElementById("map"), main);
 
   let marker = new google.maps.Marker({
-    position: { lat: 40.7079836, lng: -74.00648610000002 },
+    position: { lat: Number(geoLocation1), lng: Number(geoLocation2) },
     map: map,
     draggable: true
   });
