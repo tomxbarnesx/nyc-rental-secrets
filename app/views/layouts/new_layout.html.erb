@@ -17,8 +17,8 @@
   <div class="logo">Squawkr</div>
 
   <div class="nav-inner">
-  <div class="nav-links"><a href="#">Sign up</a></div>
-  <div class="nav-links"><a href="#">Log in</a></div>
+  <div class="nav-links"><%= link_to "Sign Up", new_user_registration_path(@user)%></div>
+  <div class="nav-links"><%= link_to "Log In", new_user_session_path(@user)%></div>
   </div>
 
   </div>
