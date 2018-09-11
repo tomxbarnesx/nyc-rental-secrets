@@ -94,17 +94,6 @@ function initMap() {
         type: "GET",
         data: {
           $limit: 10000000,
-<<<<<<< HEAD
-          $$app_token: "euroQs7GENEsqbV3te6FVNUGf"
-        }
-      }).done(function(data) {
-        alert("Retrieved " + data.length + " records from the dataset!");
-        console.log(data);
-
-        document.getElementById("bin").placeholder = data[0].bin;
-      });
-
-=======
           $$app_token: "XXXXXXXXXXXXXX"
         }
       }).done(function(data) {
@@ -116,7 +105,6 @@ function initMap() {
 
       
 
->>>>>>> 1732e40b3e5c64388369a20f2a7a0600f9fb89f8
       if (place.geometry.viewport) {
         bounds.union(place.geometry.viewport);
       } else {
@@ -125,8 +113,5 @@ function initMap() {
     });
     map.fitBounds(bounds);
   });
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 1732e40b3e5c64388369a20f2a7a0600f9fb89f8
+

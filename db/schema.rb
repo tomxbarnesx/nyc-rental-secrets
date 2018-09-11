@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2018_09_05_214918) do
-=======
 ActiveRecord::Schema.define(version: 2018_09_07_200945) do
->>>>>>> 1732e40b3e5c64388369a20f2a7a0600f9fb89f8
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,11 +18,7 @@ ActiveRecord::Schema.define(version: 2018_09_07_200945) do
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
     t.integer "building_id"
-<<<<<<< HEAD
-    t.string "type"
-=======
     t.string "comment_type"
->>>>>>> 1732e40b3e5c64388369a20f2a7a0600f9fb89f8
     t.integer "rating"
     t.string "body"
     t.datetime "created_at", null: false
