@@ -6,20 +6,20 @@ class BuildingsController < ApplicationController
 
     def show
 
-        if Comment.find_by building_id: (params[:building_id])
-
-        @comments = Comment.find_by building_id: (params[:building_id])
-
+        
+        p params[:bin1]
+        if Comment.where(:building_id => params[:bin1])
+            @comments = Comment.where(:building_id => params[:bin1])
         else
-            @comments = Comment.all
+        @comments = Comment.all
         end
 
         render :layout=> "application"
+      
         
     end
 
-    
-
+   
 end
 
 
