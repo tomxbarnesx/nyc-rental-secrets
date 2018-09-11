@@ -6,10 +6,10 @@
 
 .login-container {
   position: relative;
-  top: 20%;
+  top: 5%;
   .login-div {
-    width: 27%;
-    height: 450px;
+    width: 50%;
+    height: 750px;
     background-color: white;
     margin: 0 auto;
     box-shadow: 1px 10px 45px 1px #080808;
@@ -20,35 +20,30 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-    top: 15%;
+    padding: 2.5%;
   }
 }
 
-.input-field {
-  width: 250px;
-  height: 45px;
-  input {
-    width: 100%;
-    height: 100%;
-  }
-}
 .input-container {
-  height: 80%;
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
 }
-.new_user {
-  height: 300px;
-}
-.signup-div {
+.cont {
   display: flex;
-  justify-content: space-between;
-}
-.login-btn {
-  input {
-    width: 250px;
-    height: 35px;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20%;
+
+  .log {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 1px 10px 45px 1px #080808;
+    background: white;
+    height: 270px;
+    width: 40%;
+    padding-top: 1%;
+    border-radius: 5px;
   }
 }
