@@ -20,6 +20,37 @@ $(document).ready(function() {
   $(".menu .item").tab({ history: false });
 });
 
+var placeSearch, autocomplete, geocoder;
+
+function initAutocomplete() {
+  geocoder = new google.maps.Geocoder();
+  autocomplete = new google.maps.places.Autocomplete(
+    document.getElementById("autocomplete") /*,
+      {types: ['(cities)']}*/
+  );
+
+  autocomplete.addListener("place_changed", fillInAddress);
+}
+
+function codeAddress(address) {
+  geocoder.geocode({ address: address }, function(results, status) {
+    if (status == "OK") {
+      alert(results[0].geometry.location);
+    } else {
+      alert("Geocode was not successful for the following reason: " + status);
+    }
+  });
+}
+
+let search;
+
+function fillInAddress() {
+  var place = autocomplete.getPlace();
+  search = document.getElementById("autocomplete").value;
+
+  //   codeAddress(document.getElementById('autocomplete').value);
+}
+
 function initMap() {
   let main = {
     zoom: 8,
@@ -100,6 +131,7 @@ function initMap() {
         console.log(data);
 
         document.getElementById("bin").value = data[0].bin;
+        document.getElementById("bin1").value = data[0].bin;
       });
 
       if (place.geometry.viewport) {
@@ -111,3 +143,4 @@ function initMap() {
     map.fitBounds(bounds);
   });
 }
+

@@ -19,6 +19,22 @@
             <a class="item" data-tab="third">Violations</a>
         </div>
 
+
+
+        <script>
+        
+        $(document).ready(function(){
+            $("formname").submit();
+        });
+        </script>
+
+
+
+        <%= form_tag("/buildings/show", method:"get")  do %>
+            <%= text_field_tag :bin1, ""%>
+            <%= submit_tag 'Search'%>
+              <%end%>
+
         <div class="ui bottom attached tab active segment" data-tab="first">
 
 
@@ -52,7 +68,6 @@
       <div class="ui card">
       <div class="content">
           <label><a class="ui tag label">New Squawk</a></label>
-
 
 
 

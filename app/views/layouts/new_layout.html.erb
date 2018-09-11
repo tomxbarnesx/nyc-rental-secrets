@@ -30,13 +30,16 @@
 <div class="search-div">
 
 <div class="ui massive icon input">
-  <input type="text" placeholder="Search">
-  <i class="search icon"></i>
+<input class="prompt" type="text" placeholder="Search buildings..."  id="autocomplete">
+<button id="btn"><a href="/buildings/show"><i class="search icon"></i></a></button>
 </div>
+
+</div>
+<div class="results"></div>
 
 </div>
   
-
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['SQ_GOOGLE_KEY']%>&libraries=places&callback=initAutocomplete"></script>
 
   </body>
 </html>
