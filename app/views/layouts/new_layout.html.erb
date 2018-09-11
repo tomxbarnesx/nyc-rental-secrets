@@ -41,5 +41,17 @@
   
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['SQ_GOOGLE_KEY']%>&libraries=places&callback=initAutocomplete"></script>
 
+<script>
+
+
+  document.getElementById("btn").addEventListener("click", function() {
+    search = document.getElementById("autocomplete").value;
+    console.log(search);
+    console.log(document.getElementById("autocomplete").value);
+});
+
+
+</script>
+
   </body>
 </html>

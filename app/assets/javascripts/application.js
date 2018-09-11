@@ -21,6 +21,8 @@ $(document).ready(function() {
 });
 
 var placeSearch, autocomplete, geocoder;
+let search;
+console.log(search);
 
 function initAutocomplete() {
   geocoder = new google.maps.Geocoder();
@@ -35,14 +37,13 @@ function initAutocomplete() {
 function codeAddress(address) {
   geocoder.geocode({ address: address }, function(results, status) {
     if (status == "OK") {
+      console.log(search);
       alert(results[0].geometry.location);
     } else {
       alert("Geocode was not successful for the following reason: " + status);
     }
   });
 }
-
-let search;
 
 function fillInAddress() {
   var place = autocomplete.getPlace();
