@@ -135,6 +135,7 @@ function removeDuplicates(myArr, prop) {
   });
 }
 
+
 function stringCleaner(arr) {
   if (arr[1].match(/[0-9]/g) && arr[2] == "AVE") {
     return cleaned = [arr[0], arr[1].slice(0,-2), "AVENUE"]
@@ -265,7 +266,7 @@ function initMap() {
       stringCombiner(cleaned)
       console.log(cleaned);
 
-      
+
       $.ajax({
         url:
           "https://data.cityofnewyork.us/resource/muk7-ct23.json?$where=(starts_with(house_number, '" +
