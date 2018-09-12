@@ -266,6 +266,7 @@ function initMap() {
 
       let splitted = markers[0].title.toUpperCase().split(" ");
 
+      
       $.ajax({
         url:
           "https://data.cityofnewyork.us/resource/muk7-ct23.json?$where=(starts_with(house_number, '" +
