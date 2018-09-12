@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+    respond_to :html, :js
 
     def new
         @comment = Comment.new
@@ -7,13 +8,11 @@ class CommentsController < ApplicationController
 
     def create
         @comment = Comment.new(comment_params)
-
         if @comment.save
-           redirect_to '/buildings/show'
-       else
-           render 'new'
-      end
-
+            render '/buildings/show'
+        else
+            render 'new'
+       end
     end
 
     def show 
