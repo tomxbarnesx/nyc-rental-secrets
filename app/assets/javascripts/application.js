@@ -158,8 +158,6 @@ function codeAddress(address) {
       let geoLocation2 = results[0].geometry.bounds.f["f"];
       localStorage.setItem("geoLocation1", geoLocation1);
       localStorage.setItem("geoLocation2", geoLocation2);
-
-      alert(results[0].geometry.location);
     } else {
       alert("Geocode was not successful for the following reason: " + status);
     }
@@ -228,6 +226,8 @@ function initMap() {
   searchBox.addListener("places_changed", function() {
     var places = searchBox.getPlaces();
 
+    $(".cont").empty();
+
     if (places.length == 0) {
       return;
     }
@@ -287,6 +287,7 @@ function initMap() {
         }
         document.getElementById("bin").value = data[0].bin;
         document.getElementById("bin1").value = data[0].bin;
+        document.getElementById("bin1").innerText = data[0].bin;
       });
 
       if (place.geometry.viewport) {
