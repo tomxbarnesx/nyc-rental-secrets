@@ -1,5 +1,7 @@
+<div class="cont">
+<div class="log">
 <h2>Log in</h2>
-
+<div class ="ui form">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="input-container">
   <div class="field">
@@ -17,10 +19,12 @@
     </div>
   <% end -%>
 
-  <div class="actions login-btn">
-    <%= f.submit "Log in" %>
-  </div>
+  <div class="actions">
+  <%= f.submit "Log In", :class =>"ui primary button" %>
+  <%= render "devise/shared/links" %>
+</div>
 <% end %>
-
-<div class="signup-div"><%= render "devise/shared/links" %></div>
+</div>
+</div>
+</div>
 </div>

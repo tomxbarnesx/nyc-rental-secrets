@@ -21,42 +21,21 @@
 
 
 
-        <script>
-        
-        $(document).ready(function(){
-            $("formname").submit();
-        });
-        </script>
+   
 
 
-
-        <%= form_tag("/buildings/show", method:"get")  do %>
-            <%= text_field_tag :bin1, ""%>
-            <%= submit_tag 'Search'%>
-              <%end%>
 
         <div class="ui bottom attached tab active segment" data-tab="first">
+        <%= form_tag("/buildings/show",  :id => 'formname', method:"get", remote:true )  do %>
+            <%= text_field_tag :bin1, "", :style=>"visibility:hidden"%>
+            <%= submit_tag 'All Squawks'%>
+              <%end%> 
 
 
-        <% @comments.each do |comment| %>
-        <div class="ui card">
-      <div class="content">
-          <label><a class="ui teal right ribbon label">Squawk</a></label>
-      <div class="header"><%=comment.comment_type%></div>
-          <div class="description">
-              <p>  <%=comment.body%> 
-              </p>
-          </div>
-      </div>
-      <div class="extra content">
-          <span class="left floated like">
-              <i class="like icon"></i>
-              Like
-          </span>
-      </div>
-  </div>
-           <%end%>
-       
+        <div class="cont">
+    
+        
+       </div>
 
 
 
@@ -130,4 +109,10 @@
 
 
 
+<script>
 
+
+var geoLocation1 = localStorage.getItem("geoLocation2");
+var geoLocation2 = localStorage.getItem("geoLocation1");
+console.log(geoLocation1, geoLocation2)
+</script>

@@ -17,8 +17,8 @@
   <div class="logo">Squawkr</div>
 
   <div class="nav-inner">
-  <div class="nav-links"><a href="#">Sign up</a></div>
-  <div class="nav-links"><a href="#">Log in</a></div>
+  <div class="nav-links"><%= link_to "Sign Up", new_user_registration_path(@user)%></div>
+  <div class="nav-links"><%= link_to "Log In", new_user_session_path(@user)%></div>
   </div>
 
   </div>
@@ -40,6 +40,18 @@
 </div>
   
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['SQ_GOOGLE_KEY']%>&libraries=places&callback=initAutocomplete"></script>
+
+<script>
+
+
+  document.getElementById("btn").addEventListener("click", function() {
+    window.name = document.getElementById("autocomplete").value;
+    console.log(window.name);
+    console.log(document.getElementById("autocomplete").value);
+});
+
+
+</script>
 
   </body>
 </html>
