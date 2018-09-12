@@ -1,6 +1,3 @@
-
-
-
 <div id="wrap">
     <div class="ui raised segment row" style="width:90%">
     <div class="ui top attached purple label">
@@ -28,7 +25,6 @@
 
 
 
-        
         <div class="ui bottom attached tab active segment" data-tab="first">
         <%= form_tag("/buildings/show",  :id => 'formname', method:"get", remote:true )  do %>
             <%= text_field_tag :bin1, "", :style=>"visibility:hidden"%>
@@ -53,8 +49,6 @@
           <label><a class="ui tag label">New Squawk</a></label>
 
 
-
-        
 
           <%= form_with model: Comment.new do |form| %>
           <div class="ui form">
@@ -105,7 +99,8 @@
 
 
       <div class="ui bottom attached tab segment" data-tab="third">
-        Violations
+        <h1>Violations</h1>
+            <div id="vcontainer"></div>
       </div>
 
         </div> 
