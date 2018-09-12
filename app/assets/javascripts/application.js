@@ -181,6 +181,8 @@ function codeAddress(address) {
       let geoLocation2 = results[0].geometry.bounds.f["f"];
       localStorage.setItem("geoLocation1", geoLocation1);
       localStorage.setItem("geoLocation2", geoLocation2);
+
+      alert(results[0].geometry.location);
     } else {
       alert("Geocode was not successful for the following reason: " + status);
     }
@@ -212,34 +214,6 @@ function initMap() {
     document.getElementById("mapSearch")
   );
 
-  if (document.getElementById("mapSearch").value != null) {
-    let splitted = document
-      .getElementById("mapSearch")
-      .value.toUpperCase()
-      .split(" ");
-
-    $.ajax({
-      url:
-        "https://data.cityofnewyork.us/resource/muk7-ct23.json?$where=(starts_with(house_number, '" +
-        splitted[0] +
-        "') AND starts_with(house_street, '" +
-        splitted[1] +
-        "'))",
-      type: "GET",
-      data: {
-        $limit: 10000000,
-        $$app_token: "euroQs7GENEsqbV3te6FVNUGf"
-      }
-    }).done(function(data) {
-      console.log(data);
-      document.getElementById("title").innerText = document.getElementById(
-        "mapSearch"
-      ).value;
-      document.getElementById("bin").value = data[0].bin;
-      document.getElementById("bin1").value = data[0].bin;
-    });
-  }
-
   map.addListener("bounds_changed", function() {
     searchBox.setBounds(map.getBounds());
   });
@@ -248,8 +222,6 @@ function initMap() {
 
   searchBox.addListener("places_changed", function() {
     var places = searchBox.getPlaces();
-
-    $(".cont").empty();
 
     if (places.length == 0) {
       return;
@@ -288,14 +260,18 @@ function initMap() {
       title.innerText = markers[0].title;
 
       let splitted = markers[0].title.toUpperCase().split(" ");
-
+      console.log(splitted);
+      cleaned = []
+      stringCleaner(splitted);
+      stringCombiner(cleaned)
+      console.log(cleaned);
 
       $.ajax({
         url:
           "https://data.cityofnewyork.us/resource/muk7-ct23.json?$where=(starts_with(house_number, '" +
-          splitted[0] +
+          cleaned[0] +
           "') AND starts_with(house_street, '" +
-          splitted[1] +
+          cleaned[1] +
           "'))",
         type: "GET",
         data: {
@@ -307,6 +283,9 @@ function initMap() {
         let newData = removeDuplicates(data, "complaint_number");
         console.log(newData);
         for(let j = 0; j < newData.length; j++){
+            if (violations[newData[j].complaint_category] == undefined){
+              continue;
+            }
             document.getElementById("vcontainer").insertAdjacentHTML('afterbegin', '<div class="ui card"><div class="content"><label><a class="ui teal right ribbon label">' + newData[j].status + '</a></label><div class="header">' + newData[j].date_entered + '</div><div class="description"><p>' + violations[newData[j].complaint_category] + '</p></div></div></div>');
         }
         document.getElementById("bin").value = data[0].bin;
@@ -317,7 +296,7 @@ function initMap() {
 //  rodent api
 
 $.ajax({
-  url: "https://data.cityofnewyork.us/resource/a2h9-9z38.json?house_number="+splitted[0]+"&street_name='"+splitted[1]+"'",
+  url: "https://data.cityofnewyork.us/resource/a2h9-9z38.json?house_number="+cleaned[0]+"&street_name='"+cleaned[1]+"'",
   type: "GET",
   data: {
     "$limit" : 5000,
