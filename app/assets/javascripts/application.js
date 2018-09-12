@@ -265,6 +265,7 @@ function initMap() {
       stringCombiner(cleaned)
       console.log(cleaned);
 
+      
       $.ajax({
         url:
           "https://data.cityofnewyork.us/resource/muk7-ct23.json?$where=(starts_with(house_number, '" +
