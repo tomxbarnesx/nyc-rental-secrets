@@ -135,6 +135,28 @@ function removeDuplicates(myArr, prop) {
   });
 }
 
+function stringCleaner(arr) {
+  if (arr[1].match(/[0-9]/g) && arr[2] == "AVE") {
+    return arr = [arr[0], arr[1].slice(0,-2), "AVENUE"]
+  } else if (arr.length == 4 && arr[2].match(/(TH|RD|ST|RD)/g)){
+    if (arr[1] == "E" && arr[3] == "ST") {
+      return arr = [arr[0], "EAST", arr[2].slice(0, -2), "STREET"]
+    } else if (arr[1] == "W" && arr[3] == "ST") {
+      return arr = [arr[0], "WEST", arr[2].slice(0, -2), "STREET"]
+    }
+  } else {
+    return arr
+  }
+}
+
+function stringCombiner(arr) {
+  if (arr.length == 3) {
+    return [arr[0], arr[1] + " " + arr[2]]
+  } else if (arr.length == 4) {
+    return [arr[0], arr[1] + " " + arr[2] + " " + arr[3]]
+  }
+}
+
 function initAutocomplete() {
   geocoder = new google.maps.Geocoder();
 
@@ -196,7 +218,7 @@ function initMap() {
       .getElementById("mapSearch")
       .value.toUpperCase()
       .split(" ");
-
+    
     $.ajax({
       url:
         "https://data.cityofnewyork.us/resource/muk7-ct23.json?$where=(starts_with(house_number, '" +
@@ -206,7 +228,7 @@ function initMap() {
         "'))",
       type: "GET",
       data: {
-        $limit: 10000000,
+        $limit: 75,
         $$app_token: "euroQs7GENEsqbV3te6FVNUGf"
       }
     }).done(function(data) {
@@ -265,7 +287,7 @@ function initMap() {
       title.innerText = markers[0].title;
 
       let splitted = markers[0].title.toUpperCase().split(" ");
-
+      console.log(splitted)
       $.ajax({
         url:
           "https://data.cityofnewyork.us/resource/muk7-ct23.json?$where=(starts_with(house_number, '" +
@@ -283,6 +305,9 @@ function initMap() {
         let newData = removeDuplicates(data, "complaint_number");
         console.log(newData);
         for(let j = 0; j < newData.length; j++){
+            if (violations[newData[j].complaint_category] == undefined){
+              continue;
+            }
             document.getElementById("vcontainer").insertAdjacentHTML('afterbegin', '<div class="ui card"><div class="content"><label><a class="ui teal right ribbon label">' + newData[j].status + '</a></label><div class="header">' + newData[j].date_entered + '</div><div class="description"><p>' + violations[newData[j].complaint_category] + '</p></div></div></div>');
         }
         document.getElementById("bin").value = data[0].bin;
