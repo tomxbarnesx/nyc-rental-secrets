@@ -293,7 +293,7 @@ function initMap() {
         document.getElementById("bin1").innerText = data[0].bin;
       });
   
-//  rodent api
+//  start of rodent api
 
 $.ajax({
   url: "https://data.cityofnewyork.us/resource/a2h9-9z38.json?house_number="+cleaned[0]+"&street_name='"+cleaned[1]+"'",
@@ -325,17 +325,31 @@ dateArr.forEach(function(el){
 });
 
 let indexData = stringArr.indexOf(maxDate.toString());
-console.log(data[indexData].result);
+
+let rodentStatus = data[indexData].result;
+console.log(rodentStatus);
+$('#fourth-tab').empty();
+document.getElementById('fourth-tab').insertAdjacentHTML('afterbegin','<p>'+rodentStatus+'</p>');
+
 } else{
 console.log('no data');
+$('#fourth-tab').empty();
+document.getElementById('fourth-tab').insertAdjacentHTML('afterbegin','<p> No Data Available </p>')
 }
 
  
 alert("Retrieved " + data.length + " records from the dataset!");
 console.log(data);
+
+
 });
 
-    
+
+
+
+
+
+// end of rodent api    
    
 
       if (place.geometry.viewport) {
