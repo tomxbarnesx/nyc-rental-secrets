@@ -2,44 +2,52 @@
     <div class="ui raised segment row" style="width:90%">
     <div class="ui top attached purple label">
         <h1 style="padding-top:1%; padding-bottom:1px" id="title"></h1>
-      
-
     </div>
     
         <div class="columns">
-        
             <div id="map" style="height:400px; width:100%">Here should be the map</div>
-
         </div>
 
         <div class="columns" >
         <div class="ui top attached tabular menu">
-            <a class="item active" data-tab="first">All Squawks</a>
-            <a class="item" data-tab="second"> New Squawks</a>
+            <a class="item active" id="tab1" data-tab="first">All Squawks</a>
+            <a class="item" id="tab2" data-tab="second"> New Squawks</a>
             <a class="item" data-tab="third">Violations</a>
             <a class="item" data-tab="fourth">Info</a>
         </div>
 
         <div class="ui bottom attached tab active segment" data-tab="first">
         <%= form_tag("/buildings/show",  :id => 'formname', method:"get", remote:true )  do %>
-            <%= text_field_tag :bin1, "", :style=>""%>
-            <%= submit_tag 'All Squawks'%>
+            <%= text_field_tag :bin1, "", {:onchange => "this.form.submit()", :style=>"visibility:hidden"}%>
+           <%=submit_tag "Reveal", :class=>"ui button", :id=>"reveal"%>
               <%end%> 
+            
+              <div id ="showMe" class="ui card" style="display:none">
+              <div class="content">
+                  <label><a class="ui teal right ribbon label">Squawk</a></label>
+              <div id="head" class="header"></div>
+                  <div class="description">
+                      <p id="bod"></p>
+                  </div>
+              </div>
+              <div class="extra content">
+                  <span class="left floated like">
+                      <i class="like icon"></i>
+                      Like
+                  </span>
+              </div>
+            </div>
+            
         <div class="cont">
+
        </div>
 </div>
 
 
-
       <div class="ui bottom attached tab segment" data-tab="second">  
       <div class="ui card">
-      <div class="content">
-          <label><a class="ui tag label">New Squawk</a></label>
-
-
-
-
-        
+      <div id="formNew" class="content">
+          <label><a class="ui tag label">New Squawk</a></label>        
 
           <%= form_with model: Comment.new, remote:true do |form| %>
         
@@ -71,12 +79,12 @@
                 </div>
 
               <div class="field">
-                  <div class="ui checkbox">
+                  <div id="squawks2" class="ui checkbox">
                       <input type="checkbox" tabindex="0" class="hidden">
                       <label>I agree I am responsible for my squawks</label>
                   </div>
               </div>    
-              <%= form.submit  "Submit" %>
+              <%= form.submit "Submit", :id=>'squawks', :class=>"ui button"%>
               <% end %>
 
 
@@ -85,13 +93,8 @@
     </div>
     </div>
 
-
-   
-
-
-
       <div class="ui bottom attached tab segment" data-tab="third">
-        <h1>Violations</h1>
+      <h1>Violations</h1>
             <div id="vcontainer"></div>
       </div>
 
@@ -112,9 +115,23 @@
 
 
 <script>
+$('.ui.checkbox').checkbox();
+document.getElementById("squawks").addEventListener("click", function(){
+$('.ui.menu').find('#tab2').tab('change tab', 'first');
+$("#showMe").css("display", "block");
+document.getElementById("head").innerText = $("#comment_comment_type").val();
+document.getElementById("bod").innerText = $("#comment_body").val();
+$(".cont").empty();
 
+});
+
+$("#reveal").click(function(){
+            $("#reveal").fadeOut();
+});
 
 var geoLocation1 = localStorage.getItem("geoLocation2");
 var geoLocation2 = localStorage.getItem("geoLocation1");
 console.log(geoLocation1, geoLocation2)
 </script>
+
+
