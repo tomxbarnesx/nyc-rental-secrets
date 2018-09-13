@@ -126,6 +126,29 @@ function removeDuplicates(myArr, prop) {
   });
 }
 
+
+function stringCleaner(arr) {
+  if (arr[1].match(/[0-9]/g) && arr[2] == "AVE") {
+    return cleaned = [arr[0], arr[1].slice(0,-2), "AVENUE"]
+  } else if (arr.length == 4 && arr[2].match(/(TH|RD|ST|RD)/g)){
+    if (arr[1] == "E" && arr[3] == "ST") {
+      return cleaned = [arr[0], "EAST", arr[2].slice(0, -2), "STREET"]
+    } else if (arr[1] == "W" && arr[3] == "ST") {
+      return cleaned = [arr[0], "WEST", arr[2].slice(0, -2), "STREET"]
+    }
+  } else {
+    return cleaned = arr
+  }
+}
+
+function stringCombiner(arr) {
+  if (arr.length == 3) {
+    return cleaned = [arr[0], arr[1] + " " + arr[2]]
+  } else if (arr.length == 4) {
+    return cleaned = [arr[0], arr[1] + " " + arr[2] + " " + arr[3]]
+  }
+}
+
 function initAutocomplete() {
   geocoder = new google.maps.Geocoder();
   autocomplete = new google.maps.places.Autocomplete(
@@ -218,13 +241,18 @@ function initMap() {
       let title = document.getElementById("title");
       title.innerText = markers[0].title;
       let splitted = markers[0].title.toUpperCase().split(" ");
+      console.log(splitted);
+      cleaned = []
+      stringCleaner(splitted);
+      stringCombiner(cleaned)
+      console.log(cleaned);
 
       $.ajax({
         url:
           "https://data.cityofnewyork.us/resource/muk7-ct23.json?$where=(starts_with(house_number, '" +
-          splitted[0] +
+          cleaned[0] +
           "') AND starts_with(house_street, '" +
-          splitted[1] +
+          cleaned[1] +
           "'))",
         type: "GET",
         data: {
@@ -236,11 +264,60 @@ function initMap() {
         let newData = removeDuplicates(data, "complaint_number");
         console.log(newData);
         for(let j = 0; j < newData.length; j++){
+            if (violations[newData[j].complaint_category] == undefined){
+              continue;
+            }
             document.getElementById("vcontainer").insertAdjacentHTML('afterbegin', '<div class="ui card"><div class="content"><label><a class="ui teal right ribbon label">' + newData[j].status + '</a></label><div class="header">' + newData[j].date_entered + '</div><div class="description"><p>' + violations[newData[j].complaint_category] + '</p></div></div></div>');
         }
         document.getElementById("bin").value = data[0].bin;
         document.getElementById("bin1").value = data[0].bin;
+        document.getElementById("bin1").innerText = data[0].bin;
       });
+  
+//  rodent api
+
+$.ajax({
+  url: "https://data.cityofnewyork.us/resource/a2h9-9z38.json?house_number="+cleaned[0]+"&street_name='"+cleaned[1]+"'",
+  type: "GET",
+  data: {
+    "$limit" : 5000,
+    "$$app_token" : "euroQs7GENEsqbV3te6FVNUGf"
+  }
+}).done(function(data) {
+
+if (data.length > 0){
+let newArr=[];
+let dateArr=[];
+let stringArr =[];
+
+for(i=0; i<data.length; i++){
+  newArr.push(data[i].approved_date);
+}
+
+ newArr.forEach(function(item){
+  dateArr.push(new Date(item));
+})
+
+let maxDate = new Date(Math.max.apply(null,dateArr));
+console.log(maxDate);
+ 
+dateArr.forEach(function(el){
+  stringArr.push(el.toString());
+});
+
+let indexData = stringArr.indexOf(maxDate.toString());
+console.log(data[indexData].result);
+} else{
+console.log('no data');
+}
+
+ 
+alert("Retrieved " + data.length + " records from the dataset!");
+console.log(data);
+});
+
+    
+   
 
       if (place.geometry.viewport) {
         bounds.union(place.geometry.viewport);
@@ -251,4 +328,5 @@ function initMap() {
     map.fitBounds(bounds);
   });
 }
+
 

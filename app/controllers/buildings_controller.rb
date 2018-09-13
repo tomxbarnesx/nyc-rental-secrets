@@ -9,13 +9,17 @@ class BuildingsController < ApplicationController
         
         p params[:bin1]
         if Comment.where(:building_id => params[:bin1])
+        p params[:bin1]
+
             @comments = Comment.where(:building_id => params[:bin1])
             respond_to do |format|
                 format.html # show.html.erb
                 format.js # show.js.erb
               end
         else
+            p params[:bin1]
         @comments = Comment.all
+
         end
 
         render :layout=> "application"
