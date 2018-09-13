@@ -225,6 +225,9 @@ function initMap() {
   searchBox.addListener("places_changed", function() {
     var places = searchBox.getPlaces();
 
+    $(".cont").empty();
+    $("#showMe").css("display", "none");
+
     if (places.length == 0) {
       return;
     }
@@ -259,7 +262,7 @@ function initMap() {
       );
 
       let title = document.getElementById("title");
-      title.innerText = markers[0].title;
+      title.innerText = document.getElementById("mapSearch").value;
 
       let splitted = markers[0].title.toUpperCase().split(" ");
       console.log(splitted);
