@@ -5,6 +5,7 @@ class BuildingsController < ApplicationController
     end
 
     def show
+        $bin = params[:bin1]
         if Comment.where(:building_id => $bin)
             @comments = Comment.where(:building_id => $bin).reverse
     
@@ -16,8 +17,7 @@ class BuildingsController < ApplicationController
                 format.html # show.html.erb
                 format.js # show.js.erb
             end
-        else
-            @comments = Comment.all
+       
         end
 
         render :layout=> "application"

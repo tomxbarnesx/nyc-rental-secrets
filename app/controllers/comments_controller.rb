@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
 
     def create
         puts "HELLO WORLD THIS IS THE CREATE"
-        $bin = params[:comment][:building_id]
+        
         @comment = Comment.new(comment_params)
         @comments = Comment.where(:building_id => params[:comment][:building_id]).reverse
         puts @comments 
