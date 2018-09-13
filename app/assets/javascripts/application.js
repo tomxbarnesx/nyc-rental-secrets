@@ -343,6 +343,7 @@ function initMap() {
     $("#vcontainer").empty();
     $("#cont").empty();
     $("#showMe").css("display", "none");
+    $("#note").remove();
 
     if (places.length == 0) {
       return;

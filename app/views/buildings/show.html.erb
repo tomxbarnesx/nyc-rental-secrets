@@ -129,12 +129,18 @@ document.getElementById("bod").innerText = $("#comment_body").val();
 });
 
 
+function func() {
+    if ( $('#cont').children().length <= 0 ) {
+        $("<h2 id='note'>There are no comments for this building. Would you like to make one?</h2>").insertAfter($("#cont"));
+}
+}
+
+
+
 $("#reveal").click(function(){
     $("#reveal").fadeOut();
+    setTimeout(func, 1000)
 
-    if ( $('#cont').children().length <= 0 ) {
-        	$("<h2 id='note'>There are no comments for this building. Would you like to make one?</h2>").insertAfter($("#cont"));
-    }
 });
 
 var geoLocation1 = localStorage.getItem("geoLocation2");
