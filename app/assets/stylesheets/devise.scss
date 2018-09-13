@@ -33,7 +33,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 20%;
+  margin-top: 15%;
+
 
   .log {
     display: flex;
@@ -41,9 +42,10 @@
     align-items: center;
     box-shadow: 1px 10px 45px 1px #080808;
     background: white;
-    height: 270px;
-    width: 40%;
+    height: 350px;
+    width: 33%;
     padding-top: 1%;
     border-radius: 5px;
   }
 }
+

@@ -130,6 +130,8 @@ function removeDuplicates(myArr, prop) {
 function stringCleaner(arr) {
   if (arr[1].match(/[0-9]/g) && arr[2] == "AVE") {
     return (cleaned = [arr[0], arr[1].slice(0, -2), "AVENUE"]);
+  } else if (arr[2] == "AVE"){
+    return (cleaned = [arr[0], arr[1], "AVENUE"])
   } else if (arr[1].match(/[0-9]/g) && arr[2] == "ST") {
     return (cleaned = [arr[0], arr[1].slice(0, -2), "STREET"]);
   } else if (arr.length == 4 && arr[2].match(/(TH|RD|ST|RD)/g)) {
@@ -151,6 +153,18 @@ function stringCombiner(arr) {
   }
 }
 
+function splitCheck(arr) {
+  let point;
+  for (let i=0; i < arr.length; i++){
+    if (arr[i].includes(",")){
+      arr[i] = arr[i].replace(",", "");
+      point = arr.indexOf(arr[i]);
+      break
+    }
+  }
+  return (cleaned = arr.slice(0, point + 1))
+}
+
 var placeSearch, autocomplete, geocoder;
 
 
@@ -164,7 +178,6 @@ $(document).ready(function() {
 
 function initAutocomplete() {
   geocoder = new google.maps.Geocoder();
-
   autocomplete = new google.maps.places.Autocomplete(
     document.getElementById("autocomplete") /*,
       {types: ['(cities)']}*/
@@ -176,16 +189,6 @@ function initAutocomplete() {
 function codeAddress(address) {
   geocoder.geocode({ address: address }, function(results, status) {
     if (status == "OK") {
-      geoLocation = results[0].geometry.location;
-
-      console.log(results[0].geometry.bounds.f["f"]);
-      console.log(results[0].geometry.bounds.b["f"]);
-
-      let geoLocation1 = results[0].geometry.bounds.b["f"];
-      let geoLocation2 = results[0].geometry.bounds.f["f"];
-      localStorage.setItem("geoLocation1", geoLocation1);
-      localStorage.setItem("geoLocation2", geoLocation2);
-
       alert(results[0].geometry.location);
     } else {
       alert("Geocode was not successful for the following reason: " + status);
@@ -193,25 +196,27 @@ function codeAddress(address) {
   });
 }
 
+let search;
+
 function fillInAddress() {
   var place = autocomplete.getPlace();
   search = document.getElementById("autocomplete").value;
 
-  codeAddress(document.getElementById("autocomplete").value);
+  //   codeAddress(document.getElementById('autocomplete').value);
 }
 
 function initMap() {
   let main = {
-    zoom: 16,
-    center: { lat: Number(geoLocation1), lng: Number(geoLocation2) }
+    zoom: 8,
+    center: { lat: 40.7128, lng: -74.006 }
   };
 
   let map = new google.maps.Map(document.getElementById("map"), main);
 
   let marker = new google.maps.Marker({
-    position: { lat: Number(geoLocation1), lng: Number(geoLocation2) },
+    position: { lat: 40.7128, lng: -74.006 },
     map: map,
-    draggable: true
+    draggable: true,
   });
 
   var searchBox = new google.maps.places.SearchBox(
@@ -224,8 +229,11 @@ function initMap() {
       .value.toUpperCase()
       .split(" ");
 
+    console.log(splitted);
+    
     cleaned = [];
-    stringCleaner(splitted);
+    splitCheck(splitted);
+    stringCleaner(cleaned);
     stringCombiner(cleaned);
     console.log(cleaned);
 
