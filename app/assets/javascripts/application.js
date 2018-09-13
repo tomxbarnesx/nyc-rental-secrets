@@ -139,6 +139,8 @@ function removeDuplicates(myArr, prop) {
 function stringCleaner(arr) {
   if (arr[1].match(/[0-9]/g) && arr[2] == "AVE") {
     return cleaned = [arr[0], arr[1].slice(0,-2), "AVENUE"]
+  } else if (arr[1].match(/[0-9]/g) && arr[2] == "ST") {
+    return cleaned = [arr[0], arr[1].slice(0,-2), "STREET"]
   } else if (arr.length == 4 && arr[2].match(/(TH|RD|ST|RD)/g)){
     if (arr[1] == "E" && arr[3] == "ST") {
       return cleaned = [arr[0], "EAST", arr[2].slice(0, -2), "STREET"]
