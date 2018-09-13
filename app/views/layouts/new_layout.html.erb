@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Squawkr</title>
+    <title>SQUAWKR</title>
     <%= csrf_meta_tags %>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -20,8 +20,8 @@
   <% end %>
 <% if !current_user %>
   <div class="nav-inner">
-    <div class="nav-links"><%= link_to "Log in", new_user_session_path(@user)%></div>
-    <div class="nav-links"><%= link_to "Sign up", new_user_registration_path(@user)%></div>
+    <div class="nav-links"><%= link_to("Sign Up", new_user_registration_path)%></div>
+    <div class="nav-links"><%= link_to("Log In", new_user_session_path)%></div>
   </div>
 <% end %>
   </div>

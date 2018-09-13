@@ -1,10 +1,10 @@
-<tr id="comment-<%= comment.id %>">
+<tr id="comment-<%= @comment.id %>">
     <div class="ui card">
         <div class="content">
             <label><a class="ui teal right ribbon label">Squawk</a></label>
-            <div class="header"><%=comment.comment_type%></div>
+            <div class="header"><%=@comment.comment_type%></div>
             <div class="description">
-                <p>  <%=comment.body%></p>
+                <p>  <%=@comment.body%></p>
             </div>
         </div>
         <div class="extra content">

@@ -1,8 +1,11 @@
+
+
+
 <% @comments.each do |comment| %>
     <div class="ui card">
   <div class="content">
       <label><a class="ui teal right ribbon label">Squawk</a></label>
-  <div class="header"><%=comment.comment_type%></div>
+  <div class="header head"><%=comment.comment_type%></div>
       <div class="description">
           <p>  <%=comment.body%> 
           </p>
