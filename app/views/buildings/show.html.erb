@@ -19,7 +19,7 @@
         <div class="ui bottom attached tab active segment" data-tab="first">
         <%= form_tag("/buildings/show",  :id => 'formname', method:"get", remote:true )  do %>
             <%= text_field_tag :bin1, "", {:onchange => "this.form.submit()", :style=>"visibility:hidden"}%>
-           <%=submit_tag "Reveal", :class=>"ui button"%>
+           <%=submit_tag "Reveal", :class=>"ui button", :id=>"reveal"%>
               <%end%> 
             
               <div id ="showMe" class="ui card" style="display:none">
@@ -93,7 +93,8 @@
     </div>
 
       <div class="ui bottom attached tab segment" data-tab="third">
-        Violations
+      <h1>Violations</h1>
+            <div id="vcontainer"></div>
 
 
       </div>
@@ -122,14 +123,9 @@ $(".cont").empty();
 
 });
 
-let array = document.getElementsByClassName("head").innerText;
-
-let newArr = arr.filter(function (value, index, array) { 
-    $(".head").css("display", "none");
-    return array.indexOf (value) == index;
+$("#reveal").click(function(){
+            $("#reveal").fadeOut();
 });
-
-
 var geoLocation1 = localStorage.getItem("geoLocation2");
 var geoLocation2 = localStorage.getItem("geoLocation1");
 console.log(geoLocation1, geoLocation2)
