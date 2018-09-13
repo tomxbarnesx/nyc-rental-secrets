@@ -343,6 +343,10 @@ function initMap() {
         }
       }).done(function(data) {
         console.log(data);
+        document.getElementById("bin").value = data[0].bin;
+        document.getElementById("bin1").value = data[0].bin;
+        document.getElementById("bin1").innerText = data[0].bin;
+        
         let newData = removeDuplicates(data, "complaint_number");
         console.log(newData);
         for(let j = 0; j < newData.length; j++){
@@ -351,69 +355,7 @@ function initMap() {
             }
             document.getElementById("vcontainer").insertAdjacentHTML('afterbegin', '<div class="ui card"><div class="content"><label><a class="ui teal right ribbon label">' + newData[j].status + '</a></label><div class="header">' + newData[j].date_entered + '</div><div class="description"><p>' + violations[newData[j].complaint_category] + '</p></div></div></div>');
         }
-        document.getElementById("bin").value = data[0].bin;
-        document.getElementById("bin1").value = data[0].bin;
-        document.getElementById("bin1").innerText = data[0].bin;
-      });
-  
-//  start of rodent api
-
-$.ajax({
-  url: "https://data.cityofnewyork.us/resource/a2h9-9z38.json?house_number="+cleaned[0]+"&street_name='"+cleaned[1]+"'",
-  type: "GET",
-  data: {
-    "$limit" : 5000,
-    "$$app_token" : "euroQs7GENEsqbV3te6FVNUGf"
-  }
-}).done(function(data) {
-
-if (data.length > 0){
-let newArr=[];
-let dateArr=[];
-let stringArr =[];
-
-for(i=0; i<data.length; i++){
-  newArr.push(data[i].approved_date);
-}
-
- newArr.forEach(function(item){
-  dateArr.push(new Date(item));
-})
-
-let maxDate = new Date(Math.max.apply(null,dateArr));
-console.log(maxDate);
- 
-dateArr.forEach(function(el){
-  stringArr.push(el.toString());
-});
-
-let indexData = stringArr.indexOf(maxDate.toString());
-
-let rodentStatus = data[indexData].result;
-console.log(rodentStatus);
-$('#fourth-tab').empty();
-document.getElementById('fourth-tab').insertAdjacentHTML('afterbegin','<p>'+rodentStatus+'</p>');
-
-} else{
-console.log('no data');
-$('#fourth-tab').empty();
-document.getElementById('fourth-tab').insertAdjacentHTML('afterbegin','<p> No Data Available </p>')
-}
-
- 
-alert("Retrieved " + data.length + " records from the dataset!");
-console.log(data);
-
-
-});
-
-
-
-
-
-
-// end of rodent api    
-   
+      });   
 
       if (place.geometry.viewport) {
         bounds.union(place.geometry.viewport);
