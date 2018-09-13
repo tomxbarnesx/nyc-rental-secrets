@@ -15,7 +15,7 @@
             <a class="item" data-tab="third">Violations</a>
             <a class="item" data-tab="fourth">Info</a>
         </div>
-        
+
         <div class="ui bottom attached tab active segment" data-tab="first">
         <%= form_tag("/buildings/show",  :id => 'formname', method:"get", remote:true )  do %>
             <%= text_field_tag :bin1, "", {:onchange => "this.form.submit()", :style=>"visibility:hidden"}%>
@@ -50,6 +50,7 @@
           <label><a class="ui tag label">New Squawk</a></label>        
 
           <%= form_with model: Comment.new, remote:true do |form| %>
+        
           <div class="ui form">
               <div class="field">
                   <label>User ID</label>
@@ -95,16 +96,17 @@
       <div class="ui bottom attached tab segment" data-tab="third">
       <h1>Violations</h1>
             <div id="vcontainer"></div>
-
-
       </div>
 
 
-      <div class="ui bottom attached tab segment" data-tab="fourth">
-      Info
 
+      <div class="ui bottom attached tab segment" data-tab="fourth">  
+      <h1>Info</h1>
+      <h5 class="info-label" id="violation">Violation Number</h5>
+      <h5 class="info-label" id="rodent">Rodent Status</h5><div id ="fourth-tab"></div>
+      <h5 class="info-label" id="num-comments">Number of Comments</h5>
+      </div>
 
-    </div>
 
         </div> 
     </div>
@@ -126,10 +128,6 @@ $(".cont").empty();
 $("#reveal").click(function(){
             $("#reveal").fadeOut();
 });
-
-
-
-
 
 var geoLocation1 = localStorage.getItem("geoLocation2");
 var geoLocation2 = localStorage.getItem("geoLocation1");

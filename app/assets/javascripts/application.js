@@ -153,6 +153,7 @@ function stringCombiner(arr) {
 
 var placeSearch, autocomplete, geocoder;
 
+
 $(document).ready(function() {
   if (window.name !== null) {
     document.getElementById("mapSearch").value = window.name;
@@ -184,6 +185,8 @@ function codeAddress(address) {
       let geoLocation2 = results[0].geometry.bounds.f["f"];
       localStorage.setItem("geoLocation1", geoLocation1);
       localStorage.setItem("geoLocation2", geoLocation2);
+
+      alert(results[0].geometry.location);
     } else {
       alert("Geocode was not successful for the following reason: " + status);
     }
@@ -269,6 +272,7 @@ function initMap() {
     });
   }
 
+
   map.addListener("bounds_changed", function() {
     searchBox.setBounds(map.getBounds());
   });
@@ -319,6 +323,7 @@ function initMap() {
       title.innerText = document.getElementById("mapSearch").value;
 
       let splitted = markers[0].title.toUpperCase().split(" ");
+
       cleaned = [];
       stringCleaner(splitted);
       stringCombiner(cleaned);
@@ -333,35 +338,82 @@ function initMap() {
           "'))",
         type: "GET",
         data: {
-          $limit: 10000000,
+          $limit: 10000,
           $$app_token: "euroQs7GENEsqbV3te6FVNUGf"
         }
       }).done(function(data) {
         console.log(data);
+        let newData = removeDuplicates(data, "complaint_number");
+        console.log(newData);
+        for(let j = 0; j < newData.length; j++){
+            if (violations[newData[j].complaint_category] == undefined){
+              continue;
+            }
+            document.getElementById("vcontainer").insertAdjacentHTML('afterbegin', '<div class="ui card"><div class="content"><label><a class="ui teal right ribbon label">' + newData[j].status + '</a></label><div class="header">' + newData[j].date_entered + '</div><div class="description"><p>' + violations[newData[j].complaint_category] + '</p></div></div></div>');
+        }
         document.getElementById("bin").value = data[0].bin;
         document.getElementById("bin1").value = data[0].bin;
         document.getElementById("bin1").innerText = data[0].bin;
-
-        let newData = removeDuplicates(data, "complaint_number");
-        console.log(newData);
-        for (let j = 0; j < newData.length; j++) {
-          if (violations[newData[j].complaint_category] == undefined) {
-            continue;
-          }
-          document
-            .getElementById("vcontainer")
-            .insertAdjacentHTML(
-              "afterbegin",
-              '<div class="ui card"><div class="content"><label><a class="ui teal right ribbon label">' +
-                newData[j].status +
-                '</a></label><div class="header">' +
-                newData[j].date_entered +
-                '</div><div class="description"><p>' +
-                violations[newData[j].complaint_category] +
-                "</p></div></div></div>"
-            );
-        }
       });
+  
+//  start of rodent api
+
+$.ajax({
+  url: "https://data.cityofnewyork.us/resource/a2h9-9z38.json?house_number="+cleaned[0]+"&street_name='"+cleaned[1]+"'",
+  type: "GET",
+  data: {
+    "$limit" : 5000,
+    "$$app_token" : "euroQs7GENEsqbV3te6FVNUGf"
+  }
+}).done(function(data) {
+
+if (data.length > 0){
+let newArr=[];
+let dateArr=[];
+let stringArr =[];
+
+for(i=0; i<data.length; i++){
+  newArr.push(data[i].approved_date);
+}
+
+ newArr.forEach(function(item){
+  dateArr.push(new Date(item));
+})
+
+let maxDate = new Date(Math.max.apply(null,dateArr));
+console.log(maxDate);
+ 
+dateArr.forEach(function(el){
+  stringArr.push(el.toString());
+});
+
+let indexData = stringArr.indexOf(maxDate.toString());
+
+let rodentStatus = data[indexData].result;
+console.log(rodentStatus);
+$('#fourth-tab').empty();
+document.getElementById('fourth-tab').insertAdjacentHTML('afterbegin','<p>'+rodentStatus+'</p>');
+
+} else{
+console.log('no data');
+$('#fourth-tab').empty();
+document.getElementById('fourth-tab').insertAdjacentHTML('afterbegin','<p> No Data Available </p>')
+}
+
+ 
+alert("Retrieved " + data.length + " records from the dataset!");
+console.log(data);
+
+
+});
+
+
+
+
+
+
+// end of rodent api    
+   
 
       if (place.geometry.viewport) {
         bounds.union(place.geometry.viewport);
@@ -372,3 +424,5 @@ function initMap() {
     map.fitBounds(bounds);
   });
 }
+
+
