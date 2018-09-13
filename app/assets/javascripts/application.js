@@ -271,6 +271,9 @@ function initMap() {
       document.getElementById("bin1").value = data[0].bin;
     });
 // RODENT API 1
+ 
+
+
     $.ajax({
       url: "https://data.cityofnewyork.us/resource/a2h9-9z38.json?house_number="+cleaned[0]+"&street_name='"+cleaned[1]+"'",
       type: "GET",
@@ -299,14 +302,29 @@ function initMap() {
     dateArr.forEach(function(el){
       stringArr.push(el.toString());
     });
-    
+    let dateString = maxDate.toDateString();
+    let dateData = dateString.substring(4);
     let indexData = stringArr.indexOf(maxDate.toString());
+
+
+    let rodentObj = {
+      "Bait applied" : "https://image.flaticon.com/icons/svg/579/579124.svg",
+      "Monitoring visit" : "https://image.flaticon.com/icons/svg/905/905806.svg",
+      "Problem Conditions" : "https://image.flaticon.com/icons/svg/148/148766.svg",
+      "Passed Inspection" : "https://image.flaticon.com/icons/svg/291/291201.svg",
+      "Active Rat Signs" : "https://image.flaticon.com/icons/svg/334/334961.svg",
+      "Cleanup done" : "https://image.flaticon.com/icons/svg/926/926575.svg"
+    };
     
     let rodentStatus = data[indexData].result;
     console.log(rodentStatus);
+
+    console.log(rodentObj[rodentStatus]);
+
     $('#fourth-tab').empty();
-    document.getElementById('fourth-tab').insertAdjacentHTML('afterbegin','<p>'+rodentStatus+'</p>');
+    document.getElementById('fourth-tab').insertAdjacentHTML('afterbegin','<p>'+dateData+ ": "+rodentStatus+'</p>');
     
+
     } else{
     console.log('no data');
     $('#fourth-tab').empty();
@@ -436,13 +454,28 @@ function initMap() {
       dateArr.forEach(function(el){
         stringArr.push(el.toString());
       });
+      let dateString = maxDate.toDateString();
+      let dateData = dateString.substring(4);
       
       let indexData = stringArr.indexOf(maxDate.toString());
-      
       let rodentStatus = data[indexData].result;
+
+      let rodentObj = {
+        "Bait applied" : "https://image.flaticon.com/icons/svg/579/579124.svg",
+        "Monitoring visit" : "https://image.flaticon.com/icons/svg/905/905806.svg",
+        "Problem Conditions" : "https://image.flaticon.com/icons/svg/148/148766.svg",
+        "Passed Inspection" : "https://image.flaticon.com/icons/svg/291/291201.svg",
+        "Active Rat Signs" : "https://image.flaticon.com/icons/svg/334/334961.svg",
+        "Cleanup done" : "https://image.flaticon.com/icons/svg/926/926575.svg"
+      };
+  
+      let rodentData = rodentObj[rodentStatus];
+      console.log(rodentData)
       console.log(rodentStatus);
+
+
       $('#fourth-tab').empty();
-      document.getElementById('fourth-tab').insertAdjacentHTML('afterbegin','<p>'+rodentStatus+'</p>');
+      document.getElementById('fourth-tab').insertAdjacentHTML('afterbegin','<p>'+dateData+ ": "+rodentStatus+'</p><img src ='+rodentData+'>');
       
       } else{
       console.log('no data');
