@@ -22,15 +22,6 @@ $(document).ready(function() {
 
 var placeSearch, autocomplete, geocoder;
 
-
-$(document).ready(function() {
-  if (window.name !== null) {
-    document.getElementById("mapSearch").value = window.name;
-
-    window.name = "";
-  }
-});
-
 var violations = {"01": "ACCIDENT - CONSTRUCTION/PLUMBING",
 "03": "ADJACENT BUILDINGS - NOT PROTECTED",
 "04": "AFTER HOURS WORK - ILLEGAL",
@@ -137,7 +128,6 @@ function removeDuplicates(myArr, prop) {
 
 function initAutocomplete() {
   geocoder = new google.maps.Geocoder();
-
   autocomplete = new google.maps.places.Autocomplete(
     document.getElementById("autocomplete") /*,
       {types: ['(cities)']}*/
@@ -149,16 +139,6 @@ function initAutocomplete() {
 function codeAddress(address) {
   geocoder.geocode({ address: address }, function(results, status) {
     if (status == "OK") {
-      geoLocation = results[0].geometry.location;
-
-      console.log(results[0].geometry.bounds.f["f"]);
-      console.log(results[0].geometry.bounds.b["f"]);
-
-      let geoLocation1 = results[0].geometry.bounds.b["f"];
-      let geoLocation2 = results[0].geometry.bounds.f["f"];
-      localStorage.setItem("geoLocation1", geoLocation1);
-      localStorage.setItem("geoLocation2", geoLocation2);
-
       alert(results[0].geometry.location);
     } else {
       alert("Geocode was not successful for the following reason: " + status);
@@ -166,23 +146,25 @@ function codeAddress(address) {
   });
 }
 
+let search;
+
 function fillInAddress() {
   var place = autocomplete.getPlace();
   search = document.getElementById("autocomplete").value;
 
-  codeAddress(document.getElementById("autocomplete").value);
+  //   codeAddress(document.getElementById('autocomplete').value);
 }
 
 function initMap() {
   let main = {
-    zoom: 16,
-    center: { lat: Number(geoLocation1), lng: Number(geoLocation2) }
+    zoom: 8,
+    center: { lat: 40.7128, lng: -74.006 }
   };
 
   let map = new google.maps.Map(document.getElementById("map"), main);
 
   let marker = new google.maps.Marker({
-    position: { lat: Number(geoLocation1), lng: Number(geoLocation2) },
+    position: { lat: 40.7128, lng: -74.006 },
     map: map,
     draggable: true
   });
@@ -190,34 +172,6 @@ function initMap() {
   var searchBox = new google.maps.places.SearchBox(
     document.getElementById("mapSearch")
   );
-
-  if (document.getElementById("mapSearch").value != null) {
-    let splitted = document
-      .getElementById("mapSearch")
-      .value.toUpperCase()
-      .split(" ");
-
-    $.ajax({
-      url:
-        "https://data.cityofnewyork.us/resource/muk7-ct23.json?$where=(starts_with(house_number, '" +
-        splitted[0] +
-        "') AND starts_with(house_street, '" +
-        splitted[1] +
-        "'))",
-      type: "GET",
-      data: {
-        $limit: 10000000,
-        $$app_token: "euroQs7GENEsqbV3te6FVNUGf"
-      }
-    }).done(function(data) {
-      console.log(data);
-      document.getElementById("title").innerText = document.getElementById(
-        "mapSearch"
-      ).value;
-      document.getElementById("bin").value = data[0].bin;
-      document.getElementById("bin1").value = data[0].bin;
-    });
-  }
 
   map.addListener("bounds_changed", function() {
     searchBox.setBounds(map.getBounds());
@@ -263,7 +217,6 @@ function initMap() {
 
       let title = document.getElementById("title");
       title.innerText = markers[0].title;
-
       let splitted = markers[0].title.toUpperCase().split(" ");
 
       $.ajax({
