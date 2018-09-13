@@ -5,21 +5,19 @@ class BuildingsController < ApplicationController
     end
 
     def show
+        if Comment.where(:building_id => $bin)
+            @comments = Comment.where(:building_id => $bin).reverse
+    
+            puts "HELLO WORLD"
+            puts @comments
+            puts "HELLO WORLD"
 
-        
-        p params[:bin1]
-        if Comment.where(:building_id => params[:bin1])
-        p params[:bin1]
-
-            @comments = Comment.where(:building_id => params[:bin1])
             respond_to do |format|
                 format.html # show.html.erb
                 format.js # show.js.erb
-              end
+            end
         else
-            p params[:bin1]
-        @comments = Comment.all
-
+            @comments = Comment.all
         end
 
         render :layout=> "application"

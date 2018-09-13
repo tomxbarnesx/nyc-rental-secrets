@@ -7,23 +7,22 @@ class CommentsController < ApplicationController
 
 
     def create
+        puts "HELLO WORLD THIS IS THE CREATE"
+        $bin = params[:comment][:building_id]
         @comment = Comment.new(comment_params)
+        @comments = Comment.where(:building_id => params[:comment][:building_id]).reverse
+        puts @comments 
+        puts "HELP ME PLS"
+
         if @comment.save
             render '/buildings/show'
         else
             render 'new'
-       end
+        end
+        
     end
 
-    def show 
-        p params[:bin1]
-        if Comment.where(:building_id => params[:bin1])
-            @comments = Comment.where(:building_id => params[:bin1])
-        else
-        @comments = Comment.all
-        end
-
-        redirect_to "buildings/show"
+    def show
 
     end
 
