@@ -130,6 +130,8 @@ function removeDuplicates(myArr, prop) {
 function stringCleaner(arr) {
   if (arr[1].match(/[0-9]/g) && arr[2] == "AVE") {
     return (cleaned = [arr[0], arr[1].slice(0, -2), "AVENUE"]);
+  } else if (arr[2] == "AVE"){
+    return (cleaned = [arr[0], arr[1], "AVENUE"])
   } else if (arr[1].match(/[0-9]/g) && arr[2] == "ST") {
     return (cleaned = [arr[0], arr[1].slice(0, -2), "STREET"]);
   } else if (arr.length == 4 && arr[2].match(/(TH|RD|ST|RD)/g)) {
@@ -149,6 +151,18 @@ function stringCombiner(arr) {
   } else if (arr.length == 4) {
     return (cleaned = [arr[0], arr[1] + " " + arr[2] + " " + arr[3]]);
   }
+}
+
+function splitCheck(arr) {
+  let point;
+  for (let i=0; i < arr.length; i++){
+    if (arr[i].includes(",")){
+      arr[i] = arr[i].replace(",", "");
+      point = arr.indexOf(arr[i]);
+      break
+    }
+  }
+  return (cleaned = arr.slice(0, point + 1))
 }
 
 var placeSearch, autocomplete, geocoder;
@@ -211,7 +225,7 @@ function initMap() {
   let marker = new google.maps.Marker({
     position: { lat: Number(geoLocation1), lng: Number(geoLocation2) },
     map: map,
-    draggable: true
+    draggable: true,
   });
 
   var searchBox = new google.maps.places.SearchBox(
@@ -224,8 +238,11 @@ function initMap() {
       .value.toUpperCase()
       .split(" ");
 
+    console.log(splitted);
+    
     cleaned = [];
-    stringCleaner(splitted);
+    splitCheck(splitted);
+    stringCleaner(cleaned);
     stringCombiner(cleaned);
     console.log(cleaned);
 
