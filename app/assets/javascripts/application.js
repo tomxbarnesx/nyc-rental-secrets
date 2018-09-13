@@ -279,7 +279,7 @@ function initMap() {
     var places = searchBox.getPlaces();
     $("#reveal").fadeIn();
     $("#vcontainer").empty();
-    $(".cont").empty();
+    $("#cont").empty();
     $("#showMe").css("display", "none");
 
     if (places.length == 0) {
