@@ -15,7 +15,7 @@
   <body class="newlayout-body">
   <div class="main-nav">
   <div class="logo">Squawkr</div>
-<% if session %>
+<% if current_user %>
   <div class="nav-links"><%= link_to "Log out", destroy_session_path(:user ), :method => :delete %></div>
   <% end %>
 <% if !current_user %>
