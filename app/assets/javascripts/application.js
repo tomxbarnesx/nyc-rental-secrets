@@ -321,14 +321,14 @@ function initMap() {
 
     console.log(rodentObj[rodentStatus]);
 
-    $('#fourth-tab').empty();
-    document.getElementById('fourth-tab').insertAdjacentHTML('afterbegin','<p>'+dateData+ ": "+rodentStatus+'</p>');
+    $('#rodent-text').empty();
+    document.getElementById('rodent-text').insertAdjacentHTML('afterbegin','<p>'+dateData+ ": "+rodentStatus+'</p>');
     
 
     } else{
     console.log('no data');
-    $('#fourth-tab').empty();
-    document.getElementById('fourth-tab').insertAdjacentHTML('afterbegin','<p> No Data Available </p>')
+    $('#rodent-text').empty();
+    document.getElementById('rodent-text').insertAdjacentHTML('afterbegin','<p> No Data Available </p>')
     }
     
      
@@ -474,13 +474,13 @@ function initMap() {
       console.log(rodentStatus);
 
 
-      $('#fourth-tab').empty();
-      document.getElementById('fourth-tab').insertAdjacentHTML('afterbegin','<p>'+dateData+ ": "+rodentStatus+'</p><img src ='+rodentData+'>');
+      $('#rodent-text').empty();
+      document.getElementById('rodent-text').insertAdjacentHTML('afterbegin','<div>'+dateData+ ':</div>'+'<div><img class="rodent-img" src ='+rodentData+'>'+'<p>'+rodentStatus+'</p></div>');
       
       } else{
       console.log('no data');
-      $('#fourth-tab').empty();
-      document.getElementById('fourth-tab').insertAdjacentHTML('afterbegin','<p> No Data Available </p>')
+      $('#rodent-text').empty();
+      document.getElementById('rodent-text').insertAdjacentHTML('afterbegin','<p> No Data Available </p>')
       }
       
        
