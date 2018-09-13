@@ -115,16 +115,18 @@
 <script>
 $('.ui.checkbox').checkbox();
 document.getElementById("squawks").addEventListener("click", function(){
+$(".cont").empty();
 $('.ui.menu').find('#tab2').tab('change tab', 'first');
 $("#showMe").css("display", "block");
 document.getElementById("head").innerText = $("#comment_comment_type").val();
 document.getElementById("bod").innerText = $("#comment_body").val();
-$(".cont").empty();
+
 
 });
 
 
 $("#reveal").click(function(){
+    $(".cont").empty();
             $("#reveal").fadeOut();
 });
 
