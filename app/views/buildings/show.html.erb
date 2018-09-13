@@ -38,7 +38,7 @@
               </div>
             </div>
             
-        <div class="cont">
+        <div id="cont">
 
        </div>
 </div>
@@ -123,11 +123,22 @@ $(".cont").empty();
 
 });
 
+
 $("#reveal").click(function(){
             $("#reveal").fadeOut();
 });
 
-
+var seen = {};
+let arr =  document.querySelectorAll(".head");
+arr.forEach(function(el) {
+let text = el.innerText;
+if (seen[text]){
+    el.innerText = "HALOOOO";
+}
+else {
+    seen[text] = true;
+}
+});
 
 
 
