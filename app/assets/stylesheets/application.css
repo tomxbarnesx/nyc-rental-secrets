@@ -13,3 +13,17 @@
  *= require_tree .
  *= require_self
  */
+
+ .session{
+     margin-left: 1230px;
+     margin-top: -40px;
+ }
+
+ .log_out{
+     margin-left: 1350px;
+     margin-top: -40px;
+ }
+ .profile{
+    margin-left: 1270px;
+    margin-top: -40px;
+}
