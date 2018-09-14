@@ -255,11 +255,21 @@ function initMap() {
       let newData = removeDuplicates(data, "complaint_number");
       console.log(newData);
 
-      if (newData.length>0){
-      document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<span class="violation-num">'+newData.length+ '</span>');
-      }else{
-        document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<span class="violation-num">0</span>');
-      }
+      if (newData.length > 0){
+        let totalData = 0;
+        let closedData=0;
+       for(i=0;i<newData.length;i++){
+       if (newData[i].status === "ACTIVE") totalData++;
+       if(newData[i].status === "CLOSED") closedData++;
+       }
+       console.log(totalData);
+       $('#violation-text').empty();
+       document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<div class="active-data top"><span class="active-green violation-bold"> Active </span>'+totalData+'</div><div class="closed-data top"><span class="closed-red violation-bold">Closed </span>'+closedData+'</div><div class="violation-num"><span class="violation-bold">Total </span>'+newData.length+'</div>');
+       }else {
+        $('#violation-text').empty();
+         document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<span class="violation-num">0</span>');
+       }
+
 
       for (let j = 0; j < newData.length; j++) {
         if (violations[newData[j].complaint_category] == undefined) {
@@ -435,10 +445,19 @@ function initMap() {
         console.log(newData);
 
         if (newData.length>0){
-          document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<span class="violation-num">'+newData.length+ '</span>');
-          }else{
-            document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<span class="violation-num">0</span>');
-          }
+          let totalData = 0;
+          let closedData=0;
+         for(i=0;i<newData.length;i++){
+         if (newData[i].status === "ACTIVE") totalData++;
+         if(newData[i].status === "CLOSED") closedData++;
+         }
+         console.log(totalData);
+         $('#violation-text').empty();
+         document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<div class="active-data top"><span class="active-green violation-bold"> Active </span>'+totalData+'</div><div class="closed-data top"><span class="closed-red violation-bold">Closed </span>'+closedData+'</div><div class="violation-num"><span class="violation-bold">Total </span>'+newData.length+'</div>');
+         }else{
+          $('#violation-text').empty();
+           document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<span class="violation-num">0</span>');
+         }
 
 
         for(let j = 0; j < newData.length; j++){

@@ -88,3 +88,25 @@
   display:flex;
   margin-bottom:40px;
 }
+
+.violation-bold{
+  font-weight:bold;
+}
+.violation-content{
+  display: flex;
+  align-items: baseline;
+
+  #violation-status{
+    margin-right: 15px;
+  }
+}
+
+.top{
+  margin-bottom: 3px;
+}
+.active-green{
+  color:green;
+}
+.closed-red{
+  color:red;
+}
