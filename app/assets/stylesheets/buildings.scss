@@ -61,3 +61,14 @@
 #squawks2 {
   margin-left: 20%;
 }
+
+#new-comment-fail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+
+  .fail-button {
+    margin-top: .5em;
+  }
+}
