@@ -19,7 +19,8 @@
         <div class="ui bottom attached tab active segment" data-tab="first">
         <%= form_tag("/buildings/show",  :id => 'formname', method:"get", remote:true )  do %>
             <%= text_field_tag :bin1, "", {:onchange => "this.form.submit()", :style=>"visibility:hidden"}%>
-           <%=submit_tag "Reveal", :class=>"ui button", :id=>"reveal"%>
+            <br/>
+            <%=submit_tag "Reveal", :class=>"ui button", :id=>"reveal"%>
               <%end%> 
             
             <div id ="showMe" class="ui card" style="display:none">
@@ -31,9 +32,9 @@
                   </div>
               </div>
               <div class="extra content">
-                  <span class="left floated like">
-                      <i class="like icon"></i>
-                      Like
+                  <span id ="faker" class="left floated like">
+                      <i class="trash icon"></i>
+                      <a>Destroy</a>
                   </span>
               </div>
             </div>
@@ -92,7 +93,7 @@
     </div>
 
       <div class="ui bottom attached tab segment" data-tab="third">
-      <h1>Violations</h1>
+      <h1 id="note">Violations</h1>
             <div id="vcontainer"></div>
       </div>
 
@@ -116,20 +117,22 @@
 $('.ui.checkbox').checkbox();
 
 document.getElementById("squawks").addEventListener("click", function(){
-$("#note").remove();
+$(".note").remove();
 $(".cont").empty();
 $('.ui.menu').find('#tab2').tab('change tab', 'first');
 $("#showMe").css("display", "block");
 document.getElementById("head").innerText = $("#comment_comment_type").val();
 document.getElementById("bod").innerText = $("#comment_body").val();
-
+$("input:text").val("");
+$('input[name="comment[user_id]"]').val('');
+$('input[name="comment[rating]"]').val('');
 
 });
 
 
 function func() {
     if ( $('#cont').children().length <= 0 ) {
-        $("<h2 id='note'>There are no comments for this building. Would you like to make one?</h2>").insertAfter($("#cont"));
+        $("<h2 class='note'>There are no comments for this building.</h2><br/><h3 class='note'> Would you like to make one?</h3>").insertAfter($("#cont"));
 }
 }
 
@@ -141,9 +144,17 @@ $("#reveal").click(function(){
 
 });
 
+
+
+$("#faker").click(function(){
+    alert("Are you sure?")
+    $("#showMe").css("display", "none")
+});
+
 var geoLocation1 = localStorage.getItem("geoLocation2");
 var geoLocation2 = localStorage.getItem("geoLocation1");
 console.log(geoLocation1, geoLocation2)
+
 </script>
 
 

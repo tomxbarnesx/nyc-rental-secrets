@@ -23,10 +23,15 @@ class CommentsController < ApplicationController
         
     end
 
-    def show
-
+    def destroy
+        @comment = Comment.find(params[:id])
+        @comment.destroy
+           
     end
 
+    def show
+        redirect_to action: 'destroy'
+    end
 
 
     def comment_params

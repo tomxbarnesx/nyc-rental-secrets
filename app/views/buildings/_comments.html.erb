@@ -1,4 +1,4 @@
-'<div class="ui card">'+
+'<div id="comment-<%=comment.id %>" class="ui card">'+
     '<div class="content">'+
         '<label><a class="ui teal right ribbon label">Squawk</a></label>'+
             '<div class="header head"><%=comment.comment_type%></div>'+
@@ -6,7 +6,8 @@
     '</div>'+
         '<div class="extra content">'+
             '<span class="left floated like">'+
-                '<i class="like icon"></i>Like'+
+                '<i class="trash icon"></i>'+
+                '<%= link_to "Destroy", comment_path(comment.id), method: :delete, remote:true, data: { confirm: "Are you sure?"}, class:"destroy" %>'+
             '</span>'+
         '</div>'+
 '</div>'
