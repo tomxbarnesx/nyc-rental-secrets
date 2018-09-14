@@ -46,29 +46,37 @@
         margin-bottom: 40px;
     }
 }
+
+
 .img-div{
     display: flex;
     justify-content: space-evenly;
 }
+
+
 .pic-flex{
     display: flex;
     flex-direction: column;
     width: 230px;
     align-items: center;
 }
+
 .content{
     background-color: white;
     padding: 10px;
     padding-top: 20px;
     margin-top: 10px;
     border-radius: 5px;
-    display:none;
+   
 }
+
+
 .about-inner{
     margin: 0 auto;
     width: 91%;
     margin-bottom: 100px;
 }
+
 .image_toggle{
     border: 0;
     border-bottom: 3px solid purple;
@@ -76,6 +84,8 @@
     width: 220px;
     height: 190px;
 }
+
+
 .team-title{
     width:91%;
     margin:0 auto;
