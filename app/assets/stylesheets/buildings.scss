@@ -61,19 +61,27 @@
 #squawks2 {
   margin-left: 20%;
 }
-.rodent-img{
-  width: 30px;
-}
+
 .rodent-div{
+  width: 60%;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  width: 65%;
-  .status-div{
-    height:34px;
-  }
 }
-#rodent{
-  position: relative;
-  top: 40%;
+.img-status{
+  display: flex;
+}
+#rodent-text{
+  display: flex;
+  width: 70%;
+  justify-content: space-around;
+}
+.rodent-img{
+  width: 19px;
+  margin-right: 5px;
+}
+.info-label{
+  margin-bottom:40px;
+}
+.no-data{
+  height:55px;
 }
