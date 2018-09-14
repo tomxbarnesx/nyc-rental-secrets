@@ -55,11 +55,11 @@
                 <%= form_with model: Comment.new, remote:true do |form| %>
             
                 <div class="ui form">
+
                     <div class="field">
                         <label>Building ID</label>
                         <%= form.number_field :building_id, placeholder: "Building ID", :id => 'bin'%>
                     </div>
-
 
                     <div class="field">
                         <label>Title</label>
@@ -84,6 +84,7 @@
                 </div>    
                 <%= form.submit "Submit", :id=>'squawks', :class=>"ui button"%>
                 <% end %>
+
             </div>  
             <% else %>
             <h2>You must be logged in to post comments.</h2>
@@ -131,13 +132,11 @@ $('.ui.checkbox').checkbox();
 document.getElementById("squawks").addEventListener("click", function(){
 $(".note").remove();
 $(".cont").empty();
-$('.ui.menu').find('#tab2').tab('change tab', 'first');
+$('.ui.menu').find('#tab2').tab('change tab', 'second');
 $("#showMe").css("display", "block");
 document.getElementById("head").innerText = $("#comment_comment_type").val();
 document.getElementById("bod").innerText = $("#comment_body").val();
-$("input:text").val("");
-$('input[name="comment[user_id]"]').val('');
-$('input[name="comment[rating]"]').val('');
+
 
 });
 
