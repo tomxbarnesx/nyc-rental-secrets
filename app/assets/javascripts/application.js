@@ -130,8 +130,8 @@ function removeDuplicates(myArr, prop) {
 function stringCleaner(arr) {
   if (arr[1].match(/[0-9]/g) && arr[2] == "AVE") {
     return (cleaned = [arr[0], arr[1].slice(0, -2), "AVENUE"]);
-  } else if (arr[2] == "AVE"){
-    return (cleaned = [arr[0], arr[1], "AVENUE"])
+  } else if (arr[2] == "AVE") {
+    return (cleaned = [arr[0], arr[1], "AVENUE"]);
   } else if (arr[1].match(/[0-9]/g) && arr[2] == "ST") {
     return (cleaned = [arr[0], arr[1].slice(0, -2), "STREET"]);
   } else if (arr.length == 4 && arr[2].match(/(TH|RD|ST|RD)/g)) {
@@ -155,18 +155,17 @@ function stringCombiner(arr) {
 
 function splitCheck(arr) {
   let point;
-  for (let i=0; i < arr.length; i++){
-    if (arr[i].includes(",")){
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].includes(",")) {
       arr[i] = arr[i].replace(",", "");
       point = arr.indexOf(arr[i]);
-      break
+      break;
     }
   }
-  return (cleaned = arr.slice(0, point + 1))
+  return (cleaned = arr.slice(0, point + 1));
 }
 
 var placeSearch, autocomplete, geocoder;
-
 
 $(document).ready(function() {
   if (window.name !== null) {
@@ -189,7 +188,15 @@ function initAutocomplete() {
 function codeAddress(address) {
   geocoder.geocode({ address: address }, function(results, status) {
     if (status == "OK") {
-      alert(results[0].geometry.location);
+      geoLocation = results[0].geometry.location;
+
+      console.log(results[0].geometry.bounds.f["f"]);
+      console.log(results[0].geometry.bounds.b["f"]);
+
+      let geoLocation1 = results[0].geometry.bounds.b["f"];
+      let geoLocation2 = results[0].geometry.bounds.f["f"];
+      localStorage.setItem("geoLocation1", geoLocation1);
+      localStorage.setItem("geoLocation2", geoLocation2);
     } else {
       alert("Geocode was not successful for the following reason: " + status);
     }
@@ -202,21 +209,21 @@ function fillInAddress() {
   var place = autocomplete.getPlace();
   search = document.getElementById("autocomplete").value;
 
-  //   codeAddress(document.getElementById('autocomplete').value);
+  codeAddress(document.getElementById("autocomplete").value);
 }
 
 function initMap() {
   let main = {
-    zoom: 8,
-    center: { lat: 40.7128, lng: -74.006 }
+    zoom: 16,
+    center: { lat: Number(geoLocation1), lng: Number(geoLocation2) }
   };
 
   let map = new google.maps.Map(document.getElementById("map"), main);
 
   let marker = new google.maps.Marker({
-    position: { lat: 40.7128, lng: -74.006 },
+    position: { lat: Number(geoLocation1), lng: Number(geoLocation2) },
     map: map,
-    draggable: true,
+    draggable: true
   });
 
   var searchBox = new google.maps.places.SearchBox(
@@ -230,7 +237,7 @@ function initMap() {
       .split(" ");
 
     console.log(splitted);
-    
+
     cleaned = [];
     splitCheck(splitted);
     stringCleaner(cleaned);
@@ -295,16 +302,19 @@ function initMap() {
       document.getElementById("bin").value = data[0].bin;
       document.getElementById("bin1").value = data[0].bin;
     });
+
 // RODENT API 1
- 
-
-
     $.ajax({
-      url: "https://data.cityofnewyork.us/resource/a2h9-9z38.json?house_number="+cleaned[0]+"&street_name='"+cleaned[1]+"'",
+      url:
+        "https://data.cityofnewyork.us/resource/a2h9-9z38.json?house_number=" +
+        cleaned[0] +
+        "&street_name='" +
+        cleaned[1] +
+        "'",
       type: "GET",
       data: {
-        "$limit" : 5000,
-        "$$app_token" : "euroQs7GENEsqbV3te6FVNUGf"
+        $limit: 5000,
+        $$app_token: "euroQs7GENEsqbV3te6FVNUGf"
       }
     }).done(function(data) {
     
@@ -363,22 +373,21 @@ function initMap() {
     
     
     });
-  // END RODENT 1
+    // END RODENT 1
   }
-
 
   map.addListener("bounds_changed", function() {
     searchBox.setBounds(map.getBounds());
   });
-
   var markers = [];
 
   searchBox.addListener("places_changed", function() {
     var places = searchBox.getPlaces();
     $("#reveal").fadeIn();
     $("#vcontainer").empty();
-    $(".cont").empty();
+    $("#cont").empty();
     $("#showMe").css("display", "none");
+    $(".note").remove();
 
     if (places.length == 0) {
       return;
@@ -458,7 +467,6 @@ function initMap() {
         document.getElementById("bin1").value = data[0].bin;
         document.getElementById("bin1").innerText = data[0].bin;
 
-
         for(let j = 0; j < newData.length; j++){
             if (violations[newData[j].complaint_category] == undefined){
               continue;
@@ -468,35 +476,60 @@ function initMap() {
         
       });   
 
-// RODENT API 2
+      // RODENT API 2
       $.ajax({
-        url: "https://data.cityofnewyork.us/resource/a2h9-9z38.json?house_number="+cleaned[0]+"&street_name='"+cleaned[1]+"'",
+        url:
+          "https://data.cityofnewyork.us/resource/a2h9-9z38.json?house_number=" +
+          cleaned[0] +
+          "&street_name='" +
+          cleaned[1] +
+          "'",
         type: "GET",
         data: {
-          "$limit" : 5000,
-          "$$app_token" : "euroQs7GENEsqbV3te6FVNUGf"
+          $limit: 5000,
+          $$app_token: "euroQs7GENEsqbV3te6FVNUGf"
         }
       }).done(function(data) {
-      
-      if (data.length > 0){
-      let newArr=[];
-      let dateArr=[];
-      let stringArr =[];
-      
-      for(i=0; i<data.length; i++){
-        newArr.push(data[i].approved_date);
-      }
-      
-       newArr.forEach(function(item){
-        dateArr.push(new Date(item));
-      })
-      
-      let maxDate = new Date(Math.max.apply(null,dateArr));
-      console.log(maxDate);
-       
-      dateArr.forEach(function(el){
-        stringArr.push(el.toString());
+        if (data.length > 0) {
+          let newArr = [];
+          let dateArr = [];
+          let stringArr = [];
+
+          for (i = 0; i < data.length; i++) {
+            newArr.push(data[i].approved_date);
+          }
+
+          newArr.forEach(function(item) {
+            dateArr.push(new Date(item));
+          });
+
+          let maxDate = new Date(Math.max.apply(null, dateArr));
+          console.log(maxDate);
+
+          dateArr.forEach(function(el) {
+            stringArr.push(el.toString());
+          });
+
+          let indexData = stringArr.indexOf(maxDate.toString());
+
+          let rodentStatus = data[indexData].result;
+          console.log(rodentStatus);
+          $("#fourth-tab").empty();
+          document
+            .getElementById("fourth-tab")
+            .insertAdjacentHTML("afterbegin", "<p>" + rodentStatus + "</p>");
+        } else {
+          console.log("no data");
+          $("#fourth-tab").empty();
+          document
+            .getElementById("fourth-tab")
+            .insertAdjacentHTML("afterbegin", "<p> No Data Available </p>");
+        }
+
+        // alert("Retrieved " + data.length + " records from the dataset!");
+        console.log(data);
       });
+    
       let dateString = maxDate.toDateString();
       let dateData = dateString.substring(4);
       
@@ -533,6 +566,7 @@ function initMap() {
       });     
      //END RODENT 2
 
+
       if (place.geometry.viewport) {
         bounds.union(place.geometry.viewport);
       } else {
@@ -542,5 +576,3 @@ function initMap() {
     map.fitBounds(bounds);
   });
 }
-
-

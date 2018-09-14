@@ -5,12 +5,11 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = User.find(params[:id])
-        
+        @user = User.find(params[:id]) 
     end
 
     def new
-        @user - User.new
+        @user = User.new
     end
 
     def edit 
@@ -33,9 +32,15 @@ class UsersController < ApplicationController
         
     end
 
+    def destroy
+        @user = User.find(params[:id])
+        @user.destroy
+        redirect_to "/"
+    end
+
     private
         def user_params
-        params.require(:user).permit(:username, :first_name, :last_name, :email, :birthdate)
+            params.require(:user).permit(:username, :first_name, :last_name, :email, :birthdate)
         end
    
 end

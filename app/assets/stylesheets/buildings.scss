@@ -48,8 +48,8 @@
   height: 320px;
 }
 
-.ui .search{
-  width:20%;
+.ui .search {
+  width: 20%;
 }
 
 #formNew {
@@ -110,3 +110,27 @@
 .closed-red{
   color:red;
 }
+
+#btn {
+  width: 8%;
+}
+#reveal {
+  width: 90%;
+  margin-left: 5%;
+}
+
+.note {
+  text-align: center;
+}
+
+#new-comment-fail {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+
+  .fail-button {
+    margin-top: .5em;
+  }
+}
+
