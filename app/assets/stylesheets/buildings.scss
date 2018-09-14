@@ -62,23 +62,26 @@
   margin-left: 20%;
 }
 
-.rodent-div{
-  width: 60%;
-  display: flex;
-  justify-content: space-between;
-}
+
+
+.status-div{
+    margin-right: 5px;
+  }
+
 .img-status{
   display: flex;
 }
 #rodent-text{
   display: flex;
-  width: 70%;
-  justify-content: space-around;
+}
+.rodent-date{
+  margin-right: 10px;
 }
 .rodent-img{
   width: 19px;
   margin-right: 5px;
 }
 .info-label{
+  display:flex;
   margin-bottom:40px;
 }

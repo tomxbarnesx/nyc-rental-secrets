@@ -254,6 +254,13 @@ function initMap() {
 
       let newData = removeDuplicates(data, "complaint_number");
       console.log(newData);
+
+      if (newData.length>0){
+      document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<span class="violation-num">'+newData.length+ '</span>');
+      }else{
+        document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<span class="violation-num">0</span>');
+      }
+
       for (let j = 0; j < newData.length; j++) {
         if (violations[newData[j].complaint_category] == undefined) {
           continue;
@@ -426,7 +433,14 @@ function initMap() {
         
         let newData = removeDuplicates(data, "complaint_number");
         console.log(newData);
-        document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<span class="violation-num">'+newData.length+ '</span>');
+
+        if (newData.length>0){
+          document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<span class="violation-num">'+newData.length+ '</span>');
+          }else{
+            document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<span class="violation-num">0</span>');
+          }
+
+
         for(let j = 0; j < newData.length; j++){
             if (violations[newData[j].complaint_category] == undefined){
               continue;
