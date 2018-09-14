@@ -1,64 +1,59 @@
 <div id="crud">
-    <div class="ui segment purple">
-        <p>JANEDOE</p>
-        <p><%= link_to 'Edit', edit_user_path(@user),  :class=> "ui tiny purple button" %> 
-        <%= link_to 'Delete', edit_user_path(@user) ,  :class=> "ui tiny purple button" %></p>
-        
-    </div>
 </div>
 
+<div id="profile-container">
+    <div id="card_profile">
+        <div class="ui segment purple">
+            <h2 class="ui right floated header"></h2>
+                <div class="ui circular image">
+                    <img class="icon_image" src="https://www.shareicon.net/data/512x512/2016/09/15/829472_man_512x512.png">
+                </div>
+                    <div class="ui clearing divider"></div>
+                            <p>
+                                <strong>Username:</strong>
+                                <%= @user.username %>
+                            </p>
 
-<div id="card_profile">
-    <div class="ui segment purple">
-        <h2 class="ui right floated header"></h2>
-            <div class="ui circular image">
-                <img class="icon_image" src="https://www.shareicon.net/data/512x512/2016/09/15/829472_man_512x512.png">
-            </div>
-                <div class="ui clearing divider"></div>
-                    <thead>
-                        <p>
-                            <strong>Username:</strong>
-                            <%= @user.username %>
-                        </p>
+                            <p>
+                                <strong>First name:</strong>
+                                <%= @user.first_name %>
+                            </p>
+                                    
+                            <p>
+                                <strong>Last name:</strong>
+                                <%= @user.last_name %>
+                            </p>
 
-                        <p>
-                            <strong>First name:</strong>
-                            <%= @user.first_name %>
-                        </p>
-                                
-                        <p>
-                            <strong>Last name:</strong>
-                            <%= @user.last_name %>
-                        </p>
+                            <p>
+                                <strong>Email:</strong>
+                                <%= @user.email %>
+                            </p>
 
-                        <p>
-                        <strong>Email: janedoe@doefamily.com</strong>
-                        </p>
-
-                        <p>
-                            <strong>Birthday</strong>
-                            <%= @user.birthdate %>
-                        </p>
-                            
-                        <p>
-                        <strong>Bio:</strong>
-                        </p>
-
-                    </thead>
-    </div>
-</div>
-
-<div class="comments">
-    <div class="ui message purple", style="overflow:auto; height:570px";>    
-        <div class="header">
-             Comments
+                            <p>
+                                <strong>Birthday</strong>
+                                <%= @user.birthdate %>
+                            </p>
+        <% if current_user == @user || current_user.is_admin == true %>
+            <%= link_to 'Edit', edit_user_path(@user), :class=> "ui tiny purple button" %> 
+            <%= link_to 'Destroy', user_path(@user), method: :delete, data: { confirm: 'Are you sure?' }, :class=> "ui tiny purple button" %>
+        <% end %>
         </div>
-             <p>Nori grape silver beet broccoli kombu beet greens fava bean potato quandong celery. Bunya nuts black-eyed pea prairie turnip leek lentil turnip greens parsnip. Sea lettuce lettuce water chestnut eggplant winter purslane fennel azuki bean earthnut pea sierra leone bologi leek soko chicory celtuce parsley jícama salsify.
-             </p><div class="ui clearing divider"></div>
-             <p>Beetroot water spinach okra water chestnut ricebean pea catsear courgette summer purslane. Water spinach arugula pea tatsoi aubergine spring onion bush tomato kale radicchio turnip chicory salsify pea sprouts fava bean. Dandelion zucchini burdock yarrow chickpea dandelion sorrel courgette turnip greens tigernut soybean radish artichoke wattle seed endive groundnut broccoli arugula.
-             </p><div class="ui clearing divider"></div>
-             <p>Soko radicchio bunya nuts gram dulse silver beet parsnip napa cabbage lotus root sea lettuce brussels sprout cabbage. Catsear cauliflower garbanzo yarrow salsify chicory garlic bell pepper napa cabbage lettuce tomato kale arugula melon sierra leone bologi rutabaga tigernut. Sea lettuce gumbo grape kale kombu cauliflower salsify kohlrabi okra sea lettuce broccoli celery lotus root carrot winter purslane turnip greens garlic. Jícama garlic courgette coriander radicchio plantain scallion cauliflower fava bean desert raisin spring onion chicory bunya nuts. Sea lettuce water spinach gram fava bean leek dandelion silver beet eggplant bush tomato.
-             </p><div class="ui clearing divider"></div>
-             <p>Nori grape silver beet broccoli kombu beet greens fava bean potato quandong celery. Bunya nuts black-eyed pea prairie turnip leek lentil turnip greens parsnip. Sea lettuce lettuce water chestnut eggplant winter purslane fennel azuki bean earthnut pea sierra leone bologi leek soko chicory celtuce parsley jícama salsify.
-             </p><div class="ui clearing divider"></div>
+    </div>
+
+    <div class="comments">
+        <div class="ui message purple", style="overflow:auto; height:570px";>    
+            <div class="header"><h1>Comments</h1></div>
+            <% @user.comments.each do |comment| %>
+            <div class="ui card">
+                <div class="content">
+                    <label><a class="ui teal right ribbon label">Squawk</a></label>
+                    <div class="header head"><%=comment.comment_type%></div>
+                    <div class="description"><p><%=comment.body%></p></div>
+                </div>
+                <div class="extra content">
+                    <span class="left floated like">
+                </div>
+            </div>
+            <% end %>
+        </div>
 </div>

@@ -10,7 +10,6 @@
 }
 #card_profile {
     width: 350px;
-    margin-left: 200px;
 }
 
 #crud {
@@ -21,12 +20,15 @@
 
 .comments {
     width: 649px;
-    margin-left: 551px;
-    margin-top: -572px;
-   
 }
 
 .icon_image{
     width: 350px;
     height: 350px;
 }
+
+#profile-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
