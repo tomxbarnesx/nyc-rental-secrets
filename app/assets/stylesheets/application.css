@@ -20,10 +20,14 @@
  }
 
  .log_out{
-     margin-left: 1350px;
-     margin-top: -40px;
+     margin-left: 1340px;
+     margin-top: -38px;
  }
  .profile{
     margin-left: 1270px;
     margin-top: -40px;
+}
+.about{
+    margin-left: 1200px;
+    margin-top: -38px;
 }

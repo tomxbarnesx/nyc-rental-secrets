@@ -37,6 +37,9 @@
     <div class="profile">
       <div class="item"><a href="/users/<%=current_user.id%>"> Profile </a></div> 
     </div>
+    <div class="about">
+    <a href="/users"><div class="item">About</div></a>
+    </div>
       <div class="log_out">
         <div class="item"><%= link_to "Log out", destroy_session_path(:user ), :method => :delete %></div>
       </div>
