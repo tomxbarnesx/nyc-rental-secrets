@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
         puts "HELLO WORLD THIS IS THE CREATE"
         
         @comment = Comment.new(comment_params)
+        @comment.user_id = current_user.id
         @comments = Comment.where(:building_id => params[:comment][:building_id]).reverse
         puts @comments 
         puts "HELP ME PLS"
