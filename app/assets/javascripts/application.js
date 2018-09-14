@@ -368,7 +368,6 @@ function initMap() {
     }
     
      
-    alert("Retrieved " + data.length + " records from the dataset!");
     console.log(data);
     
     
@@ -510,60 +509,39 @@ function initMap() {
             stringArr.push(el.toString());
           });
 
+          let dateString = maxDate.toDateString();
+          let dateData = dateString.substring(4);
+          
           let indexData = stringArr.indexOf(maxDate.toString());
-
           let rodentStatus = data[indexData].result;
-          console.log(rodentStatus);
-          $("#fourth-tab").empty();
-          document
-            .getElementById("fourth-tab")
-            .insertAdjacentHTML("afterbegin", "<p>" + rodentStatus + "</p>");
-        } else {
-          console.log("no data");
-          $("#fourth-tab").empty();
-          document
-            .getElementById("fourth-tab")
-            .insertAdjacentHTML("afterbegin", "<p> No Data Available </p>");
-        }
-
-        // alert("Retrieved " + data.length + " records from the dataset!");
-        console.log(data);
-      });
     
-      let dateString = maxDate.toDateString();
-      let dateData = dateString.substring(4);
+          let rodentObj = {
+            "Bait applied" : "https://image.flaticon.com/icons/svg/579/579124.svg",
+            "Monitoring visit" : "https://image.flaticon.com/icons/svg/905/905806.svg",
+            "Problem Conditions" : "https://image.flaticon.com/icons/svg/148/148766.svg",
+            "Passed Inspection" : "https://image.flaticon.com/icons/svg/291/291201.svg",
+            "Active Rat Signs" : "https://image.flaticon.com/icons/svg/334/334961.svg",
+            "Cleanup done" : "https://image.flaticon.com/icons/svg/926/926575.svg"
+          };
       
-      let indexData = stringArr.indexOf(maxDate.toString());
-      let rodentStatus = data[indexData].result;
-
-      let rodentObj = {
-        "Bait applied" : "https://image.flaticon.com/icons/svg/579/579124.svg",
-        "Monitoring visit" : "https://image.flaticon.com/icons/svg/905/905806.svg",
-        "Problem Conditions" : "https://image.flaticon.com/icons/svg/148/148766.svg",
-        "Passed Inspection" : "https://image.flaticon.com/icons/svg/291/291201.svg",
-        "Active Rat Signs" : "https://image.flaticon.com/icons/svg/334/334961.svg",
-        "Cleanup done" : "https://image.flaticon.com/icons/svg/926/926575.svg"
-      };
+          let rodentData = rodentObj[rodentStatus];
+          console.log(rodentData)
+          console.log(rodentStatus);
+    
+    
+          $('#rodent-text').empty();
+          document.getElementById('rodent-text').insertAdjacentHTML('afterbegin','<div class="rodent-date">'+dateData+ '</div><div class="img-status"><div class="rodentimg-div"><img id="rodent-img" src ='+rodentData+'></div><div>'+rodentStatus+'</div></div>');
+          } else {
+          console.log('no data');
+          $('#rodent-text').empty();
+          document.getElementById('rodent-text').insertAdjacentHTML('afterbegin','<div class="no-data"> No Data Available </div>')
+          }
+          
+          console.log(data);
+          
+          
+          });     
   
-      let rodentData = rodentObj[rodentStatus];
-      console.log(rodentData)
-      console.log(rodentStatus);
-
-
-      $('#rodent-text').empty();
-      document.getElementById('rodent-text').insertAdjacentHTML('afterbegin','<div class="rodent-date">'+dateData+ '</div><div class="img-status"><div class="rodentimg-div"><img id="rodent-img" src ='+rodentData+'></div><div>'+rodentStatus+'</div></div>');
-      } else{
-      console.log('no data');
-      $('#rodent-text').empty();
-      document.getElementById('rodent-text').insertAdjacentHTML('afterbegin','<div class="no-data"> No Data Available </div>')
-      }
-      
-       
-      alert("Retrieved " + data.length + " records from the dataset!");
-      console.log(data);
-      
-      
-      });     
      //END RODENT 2
 
 
