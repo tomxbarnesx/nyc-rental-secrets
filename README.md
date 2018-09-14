@@ -1,24 +1,18 @@
-# README
+# SquawkR - Your ultimate one page app through NYC Real Estate 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Technologies
+Google API
+NYC Department of Buildings API
+Ruby on Rails
+Gems: Devise
+Javascript
+Jquery
+CSS/SASS
+Semantic UI
+HTML
+Ajax
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Features
+The structure of application puts great focus on uninterrupted user experience allowing users creating comments and viewing information regarding searched buildings in real time, and on a single page. 
+The platform allows to create, update, view and delete user accounts.
+Users can make comments regarding their experience with selected buildings.
