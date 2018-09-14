@@ -327,6 +327,7 @@ function initMap() {
     let rodentStatus = data[indexData].result;
     console.log(rodentStatus);
 
+    let rodentData = rodentObj[rodentStatus];
     console.log(rodentObj[rodentStatus]);
 
     $('#rodent-text').empty();
@@ -425,12 +426,14 @@ function initMap() {
         
         let newData = removeDuplicates(data, "complaint_number");
         console.log(newData);
+        document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<span class="violation-num">'+newData.length+ '</span>');
         for(let j = 0; j < newData.length; j++){
             if (violations[newData[j].complaint_category] == undefined){
               continue;
             }
             document.getElementById("vcontainer").insertAdjacentHTML('afterbegin', '<div class="ui card"><div class="content"><label><a class="ui teal right ribbon label">' + newData[j].status + '</a></label><div class="header">' + newData[j].date_entered + '</div><div class="description"><p>' + violations[newData[j].complaint_category] + '</p></div></div></div>');
         }
+        
       });   
 
 // RODENT API 2
