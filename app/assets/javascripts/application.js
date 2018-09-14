@@ -251,9 +251,11 @@ function initMap() {
       }
     }).done(function(data) {
       console.log(data);
-
+   
       let newData = removeDuplicates(data, "complaint_number");
       console.log(newData);
+
+      $('#violation-text').empty();
 
       if (newData.length > 0){
         let totalData = 0;
@@ -263,10 +265,8 @@ function initMap() {
        if(newData[i].status === "CLOSED") closedData++;
        }
        console.log(totalData);
-       $('#violation-text').empty();
        document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<div class="active-data top"><span class="active-green violation-bold"> Active </span>'+totalData+'</div><div class="closed-data top"><span class="closed-red violation-bold">Closed </span>'+closedData+'</div><div class="violation-num"><span class="violation-bold">Total </span>'+newData.length+'</div>');
-       }else {
-        $('#violation-text').empty();
+       }else{
          document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<span class="violation-num">0</span>');
        }
 
@@ -437,13 +437,10 @@ function initMap() {
         }
       }).done(function(data) {
         console.log(data);
-        document.getElementById("bin").value = data[0].bin;
-        document.getElementById("bin1").value = data[0].bin;
-        document.getElementById("bin1").innerText = data[0].bin;
-        
         let newData = removeDuplicates(data, "complaint_number");
         console.log(newData);
 
+        $('#violation-text').empty();
         if (newData.length>0){
           let totalData = 0;
           let closedData=0;
@@ -452,12 +449,14 @@ function initMap() {
          if(newData[i].status === "CLOSED") closedData++;
          }
          console.log(totalData);
-         $('#violation-text').empty();
          document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<div class="active-data top"><span class="active-green violation-bold"> Active </span>'+totalData+'</div><div class="closed-data top"><span class="closed-red violation-bold">Closed </span>'+closedData+'</div><div class="violation-num"><span class="violation-bold">Total </span>'+newData.length+'</div>');
          }else{
-          $('#violation-text').empty();
            document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<span class="violation-num">0</span>');
          }
+
+        document.getElementById("bin").value = data[0].bin;
+        document.getElementById("bin1").value = data[0].bin;
+        document.getElementById("bin1").innerText = data[0].bin;
 
 
         for(let j = 0; j < newData.length; j++){
