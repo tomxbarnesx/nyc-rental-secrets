@@ -24,6 +24,11 @@
     <div class="nav-links"><%= link_to "Log Out", destroy_session_path(:user ), :method => :delete %></div>
   <% end %>
   <% if !current_user %>
+  <div class="about_log">
+    <div class="nav-links">
+      <a href="/users"><div class="item">About</div></a>
+    </div>
+  </div>
     <div class="nav-inner">
       <div class="nav-links"><%= link_to("Sign Up", new_user_registration_path)%></div>
       <div class="nav-links"><%= link_to("Log In", new_user_session_path)%></div>
