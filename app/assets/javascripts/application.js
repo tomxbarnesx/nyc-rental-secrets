@@ -258,9 +258,26 @@ function initMap() {
       }
     }).done(function(data) {
       console.log(data);
-
+   
       let newData = removeDuplicates(data, "complaint_number");
       console.log(newData);
+
+      $('#violation-text').empty();
+
+      if (newData.length > 0){
+        let totalData = 0;
+        let closedData=0;
+       for(i=0;i<newData.length;i++){
+       if (newData[i].status === "ACTIVE") totalData++;
+       if(newData[i].status === "CLOSED") closedData++;
+       }
+       console.log(totalData);
+       document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<div class="active-data top"><span class="active-green violation-bold"> Active </span>'+totalData+'</div><div class="closed-data top"><span class="closed-red violation-bold">Closed </span>'+closedData+'</div><div class="violation-num"><span class="violation-bold">Total </span>'+newData.length+'</div>');
+       }else{
+         document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<span class="violation-num">0</span>');
+       }
+
+
       for (let j = 0; j < newData.length; j++) {
         if (violations[newData[j].complaint_category] == undefined) {
           continue;
@@ -285,7 +302,8 @@ function initMap() {
       document.getElementById("bin").value = data[0].bin;
       document.getElementById("bin1").value = data[0].bin;
     });
-    // RODENT API 1
+
+// RODENT API 1
     $.ajax({
       url:
         "https://data.cityofnewyork.us/resource/a2h9-9z38.json?house_number=" +
@@ -299,44 +317,61 @@ function initMap() {
         $$app_token: "euroQs7GENEsqbV3te6FVNUGf"
       }
     }).done(function(data) {
-      if (data.length > 0) {
-        let newArr = [];
-        let dateArr = [];
-        let stringArr = [];
+    
+    if (data.length > 0){
+    let newArr=[];
+    let dateArr=[];
+    let stringArr =[];
+    
+    for(i=0; i<data.length; i++){
+      newArr.push(data[i].approved_date);
+    }
+    
+     newArr.forEach(function(item){
+      dateArr.push(new Date(item));
+    })
+    
+    let maxDate = new Date(Math.max.apply(null,dateArr));
+    console.log(maxDate);
+     
+    dateArr.forEach(function(el){
+      stringArr.push(el.toString());
+    });
+    let dateString = maxDate.toDateString();
+    let dateData = dateString.substring(4);
+    let indexData = stringArr.indexOf(maxDate.toString());
 
-        for (i = 0; i < data.length; i++) {
-          newArr.push(data[i].approved_date);
-        }
 
-        newArr.forEach(function(item) {
-          dateArr.push(new Date(item));
-        });
+    let rodentObj = {
+      "Bait applied" : "https://image.flaticon.com/icons/svg/579/579124.svg",
+      "Monitoring visit" : "https://image.flaticon.com/icons/svg/905/905806.svg",
+      "Problem Conditions" : "https://image.flaticon.com/icons/svg/148/148766.svg",
+      "Passed Inspection" : "https://image.flaticon.com/icons/svg/291/291201.svg",
+      "Active Rat Signs" : "https://image.flaticon.com/icons/svg/334/334961.svg",
+      "Cleanup done" : "https://image.flaticon.com/icons/svg/926/926575.svg"
+    };
+    
+    let rodentStatus = data[indexData].result;
+    console.log(rodentStatus);
 
-        let maxDate = new Date(Math.max.apply(null, dateArr));
-        console.log(maxDate);
+    let rodentData = rodentObj[rodentStatus];
+    console.log(rodentObj[rodentStatus]);
 
-        dateArr.forEach(function(el) {
-          stringArr.push(el.toString());
-        });
+    $('#rodent-text').empty();
+    document.getElementById('rodent-text').insertAdjacentHTML('afterbegin','<div class="rodent-date">'+dateData+ '</div><div class="img-status"><div class="rodentimg-div"><img id="rodent-img" src ='+rodentData+'></div><div>'+rodentStatus+'</div></div>');
+    
 
-        let indexData = stringArr.indexOf(maxDate.toString());
-
-        let rodentStatus = data[indexData].result;
-        console.log(rodentStatus);
-        $("#fourth-tab").empty();
-        document
-          .getElementById("fourth-tab")
-          .insertAdjacentHTML("afterbegin", "<p>" + rodentStatus + "</p>");
-      } else {
-        console.log("no data");
-        $("#fourth-tab").empty();
-        document
-          .getElementById("fourth-tab")
-          .insertAdjacentHTML("afterbegin", "<p> No Data Available </p>");
-      }
-
-      // alert("Retrieved " + data.length + " records from the dataset!");
-      console.log(data);
+    } else{
+    console.log('no data');
+    $('#rodent-text').empty();
+    document.getElementById('rodent-text').insertAdjacentHTML('afterbegin','<div class="no-data"> No Data Available </div>')
+    }
+    
+     
+    alert("Retrieved " + data.length + " records from the dataset!");
+    console.log(data);
+    
+    
     });
     // END RODENT 1
   }
@@ -411,30 +446,35 @@ function initMap() {
         }
       }).done(function(data) {
         console.log(data);
+        let newData = removeDuplicates(data, "complaint_number");
+        console.log(newData);
+
+        $('#violation-text').empty();
+        if (newData.length>0){
+          let totalData = 0;
+          let closedData=0;
+         for(i=0;i<newData.length;i++){
+         if (newData[i].status === "ACTIVE") totalData++;
+         if(newData[i].status === "CLOSED") closedData++;
+         }
+         console.log(totalData);
+         document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<div class="active-data top"><span class="active-green violation-bold"> Active </span>'+totalData+'</div><div class="closed-data top"><span class="closed-red violation-bold">Closed </span>'+closedData+'</div><div class="violation-num"><span class="violation-bold">Total </span>'+newData.length+'</div>');
+         }else{
+           document.getElementById('violation-text').insertAdjacentHTML('afterbegin','<span class="violation-num">0</span>');
+         }
+
         document.getElementById("bin").value = data[0].bin;
         document.getElementById("bin1").value = data[0].bin;
         document.getElementById("bin1").innerText = data[0].bin;
 
-        let newData = removeDuplicates(data, "complaint_number");
-        console.log(newData);
-        for (let j = 0; j < newData.length; j++) {
-          if (violations[newData[j].complaint_category] == undefined) {
-            continue;
-          }
-          document
-            .getElementById("vcontainer")
-            .insertAdjacentHTML(
-              "afterbegin",
-              '<div class="ui card"><div class="content"><label><a class="ui teal right ribbon label">' +
-                newData[j].status +
-                '</a></label><div class="header">' +
-                newData[j].date_entered +
-                '</div><div class="description"><p>' +
-                violations[newData[j].complaint_category] +
-                "</p></div></div></div>"
-            );
+        for(let j = 0; j < newData.length; j++){
+            if (violations[newData[j].complaint_category] == undefined){
+              continue;
+            }
+            document.getElementById("vcontainer").insertAdjacentHTML('afterbegin', '<div class="ui card"><div class="content"><label><a class="ui teal right ribbon label">' + newData[j].status + '</a></label><div class="header">' + newData[j].date_entered + '</div><div class="description"><p>' + violations[newData[j].complaint_category] + '</p></div></div></div>');
         }
-      });
+        
+      });   
 
       // RODENT API 2
       $.ajax({
@@ -489,7 +529,43 @@ function initMap() {
         // alert("Retrieved " + data.length + " records from the dataset!");
         console.log(data);
       });
-      //END RODENT 2
+    
+      let dateString = maxDate.toDateString();
+      let dateData = dateString.substring(4);
+      
+      let indexData = stringArr.indexOf(maxDate.toString());
+      let rodentStatus = data[indexData].result;
+
+      let rodentObj = {
+        "Bait applied" : "https://image.flaticon.com/icons/svg/579/579124.svg",
+        "Monitoring visit" : "https://image.flaticon.com/icons/svg/905/905806.svg",
+        "Problem Conditions" : "https://image.flaticon.com/icons/svg/148/148766.svg",
+        "Passed Inspection" : "https://image.flaticon.com/icons/svg/291/291201.svg",
+        "Active Rat Signs" : "https://image.flaticon.com/icons/svg/334/334961.svg",
+        "Cleanup done" : "https://image.flaticon.com/icons/svg/926/926575.svg"
+      };
+  
+      let rodentData = rodentObj[rodentStatus];
+      console.log(rodentData)
+      console.log(rodentStatus);
+
+
+      $('#rodent-text').empty();
+      document.getElementById('rodent-text').insertAdjacentHTML('afterbegin','<div class="rodent-date">'+dateData+ '</div><div class="img-status"><div class="rodentimg-div"><img id="rodent-img" src ='+rodentData+'></div><div>'+rodentStatus+'</div></div>');
+      } else{
+      console.log('no data');
+      $('#rodent-text').empty();
+      document.getElementById('rodent-text').insertAdjacentHTML('afterbegin','<div class="no-data"> No Data Available </div>')
+      }
+      
+       
+      alert("Retrieved " + data.length + " records from the dataset!");
+      console.log(data);
+      
+      
+      });     
+     //END RODENT 2
+
 
       if (place.geometry.viewport) {
         bounds.union(place.geometry.viewport);

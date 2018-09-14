@@ -10,13 +10,14 @@
 
         <div class="columns" >
         <div class="ui top attached tabular menu">
-            <a class="item active" id="tab1" data-tab="first">All Squawks</a>
-            <a class="item" id="tab2" data-tab="second"> New Squawks</a>
-            <a class="item" data-tab="third">Violations</a>
-            <a class="item" data-tab="fourth">Info</a>
+            <a class="item active" data-tab="first">Info</a>
+            <a class="item " id="tab1" data-tab="second">All Squawks</a>
+            <a class="item" id="tab2" data-tab="third"> New Squawks</a>
+            <a class="item" data-tab="fourth">Violations</a>
+            
         </div>
 
-        <div class="ui bottom attached tab active segment" data-tab="first">
+        <div class="ui bottom attached tab segment" data-tab="second">
         <%= form_tag("/buildings/show",  :id => 'formname', method:"get", remote:true )  do %>
             <%= text_field_tag :bin1, "", {:onchange => "this.form.submit()", :style=>"visibility:hidden"}%>
             <br/>
@@ -43,6 +44,7 @@
 
        </div>
 </div>
+
 
 
       <div class="ui bottom attached tab segment" data-tab="second">  
@@ -92,19 +94,29 @@
     </div>
     </div>
 
-      <div class="ui bottom attached tab segment" data-tab="third">
-      <h1 id="note">Violations</h1>
+      <div class="ui bottom attached tab segment" data-tab="fourth">
+      <h1>Violations</h1>
             <div id="vcontainer"></div>
       </div>
 
 
 
-      <div class="ui bottom attached tab segment" data-tab="fourth">  
+      <div class="ui bottom attached tab active segment" data-tab="first">  
       <h1>Info</h1>
-      <h5 class="info-label" id="violation">Violation Number</h5>
-      <h5 class="info-label" id="rodent">Rodent Status</h5><div id ="fourth-tab"></div>
-      <h5 class="info-label" id="num-comments">Number of Comments</h5>
-      </div>
+
+     <div class="ui card">
+     <div class="content violation-content">
+       <div class="header" id="violation-status"><h5 id="violation">Number of Violations</h5></div>
+       <div id="violation-text"></div>
+     </div>
+     </div>
+
+     <div class="ui card">
+     <div class="content">
+        <div class="header status-div"><h5 id="rodent">Rodent Status</h5></div>
+        <div id ="rodent-text"></div>
+     </div>
+     </div>
 
 
         </div> 

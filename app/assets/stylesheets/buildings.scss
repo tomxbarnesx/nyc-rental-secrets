@@ -62,6 +62,55 @@
   margin-left: 20%;
 }
 
+
+
+.status-div{
+    margin-right: 5px;
+  }
+
+.img-status{
+  display: flex;
+}
+#rodent-text{
+  display: flex;
+}
+.rodent-date{
+  margin-right: 10px;
+}
+.rodentimg-div{
+    #rodent-img{
+      width: 17px;
+      margin-right: 5px;
+      vertical-align: baseline;
+    }
+}
+.info-label{
+  display:flex;
+  margin-bottom:40px;
+}
+
+.violation-bold{
+  font-weight:bold;
+}
+.violation-content{
+  display: flex;
+  align-items: baseline;
+
+  #violation-status{
+    margin-right: 15px;
+  }
+}
+
+.top{
+  margin-bottom: 3px;
+}
+.active-green{
+  color:green;
+}
+.closed-red{
+  color:red;
+}
+
 #btn {
   width: 8%;
 }
@@ -84,3 +133,4 @@
     margin-top: .5em;
   }
 }
+
