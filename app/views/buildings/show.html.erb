@@ -32,9 +32,9 @@
                   </div>
               </div>
               <div class="extra content">
-                  <span class="left floated like">
-                      <i class="like icon"></i>
-                      Like
+                  <span id ="faker" class="left floated like">
+                      <i class="trash icon"></i>
+                      <a>Destroy</a>
                   </span>
               </div>
             </div>
@@ -119,30 +119,26 @@
 $('.ui.checkbox').checkbox();
 
 document.getElementById("squawks").addEventListener("click", function(){
-$("#note").remove();
+$(".note").remove();
 $(".cont").empty();
 $('.ui.menu').find('#tab2').tab('change tab', 'first');
 $("#showMe").css("display", "block");
 document.getElementById("head").innerText = $("#comment_comment_type").val();
 document.getElementById("bod").innerText = $("#comment_body").val();
-
+$("input:text").val("");
+$('input[name="comment[user_id]"]').val('');
+$('input[name="comment[rating]"]').val('');
 
 });
 
 
 function func() {
     if ( $('#cont').children().length <= 0 ) {
-        $("<h2 id='note'>There are no comments for this building.</h2><br/><h3 id='note'> Would you like to make one?</h3>").insertAfter($("#cont"));
+        $("<h2 class='note'>There are no comments for this building.</h2><br/><h3 class='note'> Would you like to make one?</h3>").insertAfter($("#cont"));
 }
 }
 
-function violations() {
-    if($('#vcontainer').children().length <= 0 ) {
-        $("<h3 id='note'>There are no records for this building.</h3>").insertAfter($('#vcontainer'));
-    }
-}
 
-setTimeout(violations, 2000)
 
 $("#reveal").click(function(){
     $("#reveal").fadeOut();
@@ -150,9 +146,17 @@ $("#reveal").click(function(){
 
 });
 
+
+
+$("#faker").click(function(){
+    alert("Are you sure?")
+    $("#showMe").css("display", "none")
+});
+
 var geoLocation1 = localStorage.getItem("geoLocation2");
 var geoLocation2 = localStorage.getItem("geoLocation1");
 console.log(geoLocation1, geoLocation2)
+
 </script>
 
 
