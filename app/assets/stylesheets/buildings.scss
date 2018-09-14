@@ -77,9 +77,12 @@
 .rodent-date{
   margin-right: 10px;
 }
-.rodent-img{
-  width: 19px;
-  margin-right: 5px;
+.rodentimg-div{
+    #rodent-img{
+      width: 17px;
+      margin-right: 5px;
+      vertical-align: baseline;
+    }
 }
 .info-label{
   display:flex;

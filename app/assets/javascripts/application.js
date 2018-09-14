@@ -338,7 +338,7 @@ function initMap() {
     console.log(rodentObj[rodentStatus]);
 
     $('#rodent-text').empty();
-    document.getElementById('rodent-text').insertAdjacentHTML('afterbegin','<div class="rodent-date">'+dateData+ '</div><div class="img-status"><div class="rodentimg-div"><img class="rodent-img" src ='+rodentData+'></div><div>'+rodentStatus+'</div></div>');
+    document.getElementById('rodent-text').insertAdjacentHTML('afterbegin','<div class="rodent-date">'+dateData+ '</div><div class="img-status"><div class="rodentimg-div"><img id="rodent-img" src ='+rodentData+'></div><div>'+rodentStatus+'</div></div>');
     
 
     } else{
@@ -500,7 +500,7 @@ function initMap() {
 
 
       $('#rodent-text').empty();
-      document.getElementById('rodent-text').insertAdjacentHTML('afterbegin','<div class="rodent-date">'+dateData+ '</div><div class="img-status"><div class="rodentimg-div"><img class="rodent-img" src ='+rodentData+'></div><div>'+rodentStatus+'</div></div>');
+      document.getElementById('rodent-text').insertAdjacentHTML('afterbegin','<div class="rodent-date">'+dateData+ '</div><div class="img-status"><div class="rodentimg-div"><img id="rodent-img" src ='+rodentData+'></div><div>'+rodentStatus+'</div></div>');
       } else{
       console.log('no data');
       $('#rodent-text').empty();
