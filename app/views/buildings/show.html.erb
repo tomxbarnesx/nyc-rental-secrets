@@ -19,7 +19,8 @@
         <div class="ui bottom attached tab active segment" data-tab="first">
         <%= form_tag("/buildings/show",  :id => 'formname', method:"get", remote:true )  do %>
             <%= text_field_tag :bin1, "", {:onchange => "this.form.submit()", :style=>"visibility:hidden"}%>
-           <%=submit_tag "Reveal", :class=>"ui button", :id=>"reveal"%>
+            <br/>
+            <%=submit_tag "Reveal", :class=>"ui button", :id=>"reveal"%>
               <%end%> 
             
             <div id ="showMe" class="ui card" style="display:none">
@@ -94,7 +95,7 @@
     </div>
 
       <div class="ui bottom attached tab segment" data-tab="third">
-      <h1>Violations</h1>
+      <h1 id="note">Violations</h1>
             <div id="vcontainer"></div>
       </div>
 
@@ -131,11 +132,17 @@ document.getElementById("bod").innerText = $("#comment_body").val();
 
 function func() {
     if ( $('#cont').children().length <= 0 ) {
-        $("<h2 id='note'>There are no comments for this building. Would you like to make one?</h2>").insertAfter($("#cont"));
+        $("<h2 id='note'>There are no comments for this building.</h2><br/><h3 id='note'> Would you like to make one?</h3>").insertAfter($("#cont"));
 }
 }
 
+function violations() {
+    if($('#vcontainer').children().length <= 0 ) {
+        $("<h3 id='note'>There are no records for this building.</h3>").insertAfter($('#vcontainer'));
+    }
+}
 
+setTimeout(violations, 2000)
 
 $("#reveal").click(function(){
     $("#reveal").fadeOut();
