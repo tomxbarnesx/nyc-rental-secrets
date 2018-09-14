@@ -46,51 +46,49 @@
 
 
       <div class="ui bottom attached tab segment" data-tab="second">  
-      <div class="ui card">
-      <div id="formNew" class="content">
-          <label><a class="ui tag label">New Squawk</a></label>        
+        <div class="ui card">
+            <div id="formNew" class="content">
+                <% if current_user %>
+                <label><a class="ui tag label">New Squawk</a></label>        
+                <%= form_with model: Comment.new, remote:true do |form| %>
+            
+                <div class="ui form">
+                    <div class="field">
+                        <label>Building ID</label>
+                        <%= form.number_field :building_id, placeholder: "Building ID", :id => 'bin'%>
+                    </div>
 
-          <%= form_with model: Comment.new, remote:true do |form| %>
-        
-          <div class="ui form">
-              <div class="field">
-                  <label>User ID</label>
-                  <%= form.number_field :user_id, placeholder: "User ID"%>
-              </div>
 
-              <div class="field">
-                  <label>Building ID</label>
-                  <%= form.number_field :building_id, placeholder: "Building ID", :id => 'bin'%>
-                </div>
+                    <div class="field">
+                        <label>Title</label>
+                        <%= form.text_field :comment_type, placeholder: "Comment title"%>
+                    </div>
 
+                    <div class="field">
+                        <label>Rating</label>
+                        <%= form.number_field :rating, placeholder: "Rating 1-5"%>
+                    </div>
+
+                    <div class="field">
+                        <label>Body</label>
+                        <%= form.text_field :body, placeholder: "Write your comment here..."%>
+                    </div>
 
                 <div class="field">
-                <label>Type</label>
-                <%= form.text_field :comment_type, placeholder: "Comment type"%>
-                </div>
-
-                <div class="field">
-                <label>Rating</label>
-                <%= form.number_field :rating, placeholder: "Rating"%>
-                </div>
-
-                <div class="field">
-                <label>Body</label>
-                <%= form.text_field :body, placeholder: "Content..."%>
-                </div>
-
-              <div class="field">
-                  <div id="squawks2" class="ui checkbox">
-                      <input type="checkbox" tabindex="0" class="hidden">
-                      <label>I agree I am responsible for my squawks</label>
-                  </div>
-              </div>    
-              <%= form.submit "Submit", :id=>'squawks', :class=>"ui button"%>
-              <% end %>
-
-
-          </div>  
-      </div>  
+                    <div id="squawks2" class="ui checkbox">
+                        <input type="checkbox" tabindex="0" class="hidden">
+                        <label>I agree I am responsible for my squawks</label>
+                    </div>
+                </div>    
+                <%= form.submit "Submit", :id=>'squawks', :class=>"ui button"%>
+                <% end %>
+            </div>  
+            <% else %>
+            <h2>You must be logged in to post comments.</h2>
+            <button class="ui button"><%= link_to("Log In", new_user_session_path)%></button>
+            <button class="ui button fail-button"><%= link_to("Sign Up", new_user_registration_path)%></button>
+        <% end %> 
+      </div> 
     </div>
     </div>
 
