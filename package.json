@@ -1,8 +1,5 @@
 {
   "name": "rentalsecrets",
   "private": true,
-  "engines": {
-    "node": "10.9.0",
-    "yarn": "1.9.4"
-  }
+  "dependencies": {}
 }
