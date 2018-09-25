@@ -13,7 +13,6 @@
 * Ajax
 
 ## Screenrecording:
-!["Squawkr_Demo"](squawkr_demo.gif)
 
 
 ## Features
