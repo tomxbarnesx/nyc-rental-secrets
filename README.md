@@ -13,7 +13,7 @@
 * Ajax
 
 ## Screenrecording:
-
+!["Squawkr_Demo"](squawkr_demo.gif)
 
 ## Features
 * The structure of application puts great focus on uninterrupted user experience allowing users creating comments and viewing information regarding searched buildings in real time, and on a single page. 
